@@ -92,7 +92,7 @@
             "plugin": {
               "keys": {
                 "topic": {
-                  "repr": "'/diff_drive_controller/cmd_vel'",
+                  "repr": "'/ridgeback_control/cmd_vel'",
                   "type": "repr"
                 },
                 "vw_max": {

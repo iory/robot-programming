@@ -679,7 +679,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://screw_mechanum_module/meshes/base_link.dae"/>
+        <cylinder radius="0.03" length="0.02"/>
       </geometry>
       <origin rpy="-1.5707963267949 6.67140997056125e-17 -1.57079632679486" xyz="3.62670863096242e-16 -0.0234999999999999 1.90166560887181e-18"/>
     </collision>
@@ -699,7 +699,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://screw_mechanum_module/meshes/link1.dae"/>
+        <cylinder radius="0.03" length="0.02"/>
       </geometry>
       <origin rpy="-1.57079632679486 -4.0188125235906916e-14 -1.57079632679492" xyz="-0.0539999999999978 -0.0657500000000021 -0.102"/>
     </collision>
@@ -719,7 +719,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://screw_mechanum_module/meshes/link2.dae"/>
+      <cylinder radius="0.03" length="0.02"/>
       </geometry>
       <origin rpy="-1.5707963267949 -2.131628307790371e-15 -1.57079632679492" xyz="-0.0539999999999662 0.0657499999999586 -0.102"/>
     </collision>
@@ -739,7 +739,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://screw_mechanum_module/meshes/link3.dae"/>
+      <cylinder radius="0.03" length="0.02"/>
       </geometry>
       <origin rpy="-1.5707963267949 -2.9117222201804313e-15 -1.57079632679492" xyz="0.0539999999999998 -0.0657500000000001 -0.102"/>
     </collision>
@@ -759,7 +759,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://screw_mechanum_module/meshes/link4.dae"/>
+      <cylinder radius="0.03" length="0.02"/>
       </geometry>
       <origin rpy="-1.57079632679486 -3.973915661273562e-14 -1.57079632679492" xyz="0.0539999999999999 0.0657499999999995 -0.102"/>
     </collision>
