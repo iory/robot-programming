@@ -224,14 +224,14 @@
   </link>
   <link name="rarm_module1_dummy_link"/>
   <joint name="rarm_module1_joint1" type="revolute">
-    <limit effort="0.0" lower="-1.57" upper="0.087" velocity="0.0"/>
+    <limit effort="0.0" lower="-1.57" upper="0.087" velocity="6.5"/>
     <parent link="rarm_module1_base_link"/>
     <child link="rarm_module1_link1"/>
     <axis xyz="0. 1. 0."/>
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.0 0.035"/>
   </joint>
   <joint name="rarm_module1_joint2" type="revolute">
-    <limit effort="0.0" lower="-2.35" upper="2.35" velocity="0.0"/>
+    <limit effort="0.0" lower="-2.35" upper="2.35" velocity="6.5"/>
     <parent link="rarm_module1_link1"/>
     <child link="rarm_module1_link2"/>
     <axis xyz="-1.  0.  0."/>
@@ -385,14 +385,14 @@
     </collision>
   </link>
   <joint name="right_hand_joint1" type="revolute">
-    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="0.0"/>
+    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="6.5"/>
     <parent link="right_hand_base_link"/>
     <child link="right_hand_link1"/>
     <axis xyz="-1.  0.  0."/>
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.011737 0.034803"/>
   </joint>
   <joint name="right_hand_joint2" type="revolute">
-    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="0.0"/>
+    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="6.5"/>
     <parent link="right_hand_base_link"/>
     <child link="right_hand_link2"/>
     <axis xyz="1. 0. 0."/>
@@ -475,14 +475,14 @@
   </link>
   <link name="larm_module1_dummy_link"/>
   <joint name="larm_module1_joint1" type="revolute">
-    <limit effort="0.0" lower="-1.57" upper="0.087" velocity="0.0"/>
+    <limit effort="0.0" lower="-1.57" upper="0.087" velocity="6.5"/>
     <parent link="larm_module1_base_link"/>
     <child link="larm_module1_link1"/>
     <axis xyz=" 0. -1.  0."/>
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.0 0.035"/>
   </joint>
   <joint name="larm_module1_joint2" type="revolute">
-    <limit effort="0.0" lower="-2.35" upper="2.35" velocity="0.0"/>
+    <limit effort="0.0" lower="-2.35" upper="2.35" velocity="6.5"/>
     <parent link="larm_module1_link1"/>
     <child link="larm_module1_link2"/>
     <axis xyz="1. 0. 0."/>
@@ -551,7 +551,7 @@
   </link>
   <link name="larm_module2_dummy_link"/>
   <joint name="larm_module2_joint1" type="revolute">
-    <limit effort="0.0" lower="-1.78" upper="1.78" velocity="0.0"/>
+    <limit effort="0.0" lower="-1.78" upper="1.78" velocity="6.5"/>
     <parent link="larm_module2_base_link"/>
     <child link="larm_module2_link1"/>
     <axis xyz="-1.  0.  0."/>
@@ -636,14 +636,14 @@
     </collision>
   </link>
   <joint name="left_hand_joint1" type="revolute">
-    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="0.0"/>
+    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="6.5"/>
     <parent link="left_hand_base_link"/>
     <child link="left_hand_link1"/>
     <axis xyz="-1.  0.  0."/>
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.011737 0.034803"/>
   </joint>
   <joint name="left_hand_joint2" type="revolute">
-    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="0.0"/>
+    <limit effort="0.0" lower="-0.43" upper="1.57" velocity="6.5"/>
     <parent link="left_hand_base_link"/>
     <child link="left_hand_link2"/>
     <mimic joint="left_hand_joint1" multiplier="1.0" offset="0.0"/>
