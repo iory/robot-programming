@@ -1,0 +1,18 @@
+joint_name_to_servo_id: {
+  head_joint0: {id: 32, direction: 1, offset: 0},
+  head_module1_joint1: {id: 34, direction: 1, offset: 0},
+  rarm_joint0: {id: 0, direction: 1, offset: 0},
+  rarm_module1_joint1: {id: 2, direction: 1, offset: 0},
+  rarm_module1_joint2: {id: 4, direction: 1, offset: 0},
+  rarm_module2_joint1: {id: 6, direction: 1, offset: 0},
+  right_hand_joint1: {id: 14, direction: 1, offset: 0},
+  larm_joint0: {id: 1, direction: 1, offset: 0},
+  larm_module1_joint1: {id: 3, direction: -1, offset: 0},
+  larm_module1_joint2: {id: 5, direction: 1, offset: 0},
+  larm_module2_joint1: {id: 7, direction: 1, offset: 0},
+  left_hand_joint1: {id: 15, direction: 1, offset: 0},
+  mechanum_joint1: {id: 22, direction: 1, offset: 0, type: continuous},
+  mechanum_joint2: {id: 23, direction: -1, offset: 0, type: continuous},
+  mechanum_joint3: {id: 20, direction: 1, offset: 0, type: continuous},
+  mechanum_joint4: {id: 21, direction: 1, offset: 0, type: continuous},
+}
