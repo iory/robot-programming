@@ -238,7 +238,7 @@
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.0 0.0"/>
   </joint>
   <joint name="rarm_module1_dummy_joint" type="fixed">
-    <limit effort="0.0" velocity="0.0"/>
+    <limit effort="0.0" velocity="6.5"/>
     <parent link="rarm_module1_link2"/>
     <child link="rarm_module1_dummy_link"/>
     <axis xyz="0. 0. 0."/>
@@ -300,14 +300,14 @@
   </link>
   <link name="rarm_module2_dummy_link"/>
   <joint name="rarm_module2_joint1" type="revolute">
-    <limit effort="0.0" lower="-1.78" upper="1.78" velocity="0.0"/>
+    <limit effort="0.0" lower="-1.78" upper="1.78" velocity="6.5"/>
     <parent link="rarm_module2_base_link"/>
     <child link="rarm_module2_link1"/>
     <axis xyz="-1.  0.  0."/>
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.0 0.04"/>
   </joint>
   <joint name="rarm_module2_dummy_joint" type="fixed">
-    <limit effort="0.0" velocity="0.0"/>
+    <limit effort="0.0" velocity="6.5"/>
     <parent link="rarm_module2_link1"/>
     <child link="rarm_module2_dummy_link"/>
     <axis xyz="0. 0. 0."/>
@@ -489,7 +489,7 @@
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.0 0.0"/>
   </joint>
   <joint name="larm_module1_dummy_joint" type="fixed">
-    <limit effort="0.0" velocity="0.0"/>
+    <limit effort="0.0" velocity="6.5"/>
     <parent link="larm_module1_link2"/>
     <child link="larm_module1_dummy_link"/>
     <axis xyz="0. 0. 0."/>
@@ -558,7 +558,7 @@
     <origin rpy="0.0 -0.0 0.0" xyz="0.0 0.0 0.04"/>
   </joint>
   <joint name="larm_module2_dummy_joint" type="fixed">
-    <limit effort="0.0" velocity="0.0"/>
+    <limit effort="0.0" velocity="6.5"/>
     <parent link="larm_module2_link1"/>
     <child link="larm_module2_dummy_link"/>
     <axis xyz="0. 0. 0."/>
@@ -853,7 +853,7 @@
     </collision>
   </link>
   <joint name="head_module1_joint1" type="revolute">
-    <limit effort="0.0" lower="-1.57" upper="1.57" velocity="0.0"/>
+    <limit effort="0.0" lower="-1.57" upper="1.57" velocity="6.5"/>
     <parent link="head_module1_base_link"/>
     <child link="head_module1_link1"/>
     <axis xyz=" 0. -1.  0."/>
