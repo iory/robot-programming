@@ -21,4 +21,14 @@
   <depend>rviz</depend>
   <depend>joint_state_publisher_gui</depend>
 
+
+  <depend>screw_20mmhead_module_cover</depend>
+<depend>screw_26mmhinge_module_cover</depend>
+<depend>screw_body_module</depend>
+<depend>screw_crosscantileverleft_module_cover</depend>
+<depend>screw_crosscantileverright_module_cover</depend>
+<depend>screw_hand_module</depend>
+<depend>screw_mechanum_module</depend>
+
+
 </package>
