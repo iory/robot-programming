@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot name="jedy_minimal">
+  <!-- Base Link -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <!-- Right Arm Link -->
+  <link name="rarm_link0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder radius="0.02" length="0.05"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.02" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <!-- Left Arm Link -->
+  <link name="larm_link0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder radius="0.02" length="0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.02" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <!-- Head Link -->
+  <link name="head_link0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <!-- Joints -->
+  <joint name="rarm_joint0" type="revolute">
+    <limit effort="0.48" velocity="6.55" lower="-2.35" upper="2.35"/>
+    <parent link="base_link"/>
+    <child link="rarm_link0"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="0.08 0 0.05" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="larm_joint0" type="revolute">
+    <limit effort="0.48" velocity="6.55" lower="-2.35" upper="2.35"/>
+    <parent link="base_link"/>
+    <child link="larm_link0"/>
+    <axis xyz="0 -1 0"/>
+    <origin xyz="-0.08 0 0.05" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="head_joint0" type="revolute">
+    <limit effort="0.48" velocity="6.55" lower="-2.35" upper="2.35"/>
+    <parent link="base_link"/>
+    <child link="head_link0"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+  </joint>
+</robot>
