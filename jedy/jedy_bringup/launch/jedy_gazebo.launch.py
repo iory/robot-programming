@@ -1,4 +1,3 @@
-
 import os
 
 from ament_index_python.packages import get_package_share_directory
@@ -25,8 +24,8 @@ def generate_launch_description():
     gui = LaunchConfiguration('gui', default='true')
     headless = LaunchConfiguration('headless', default='false')
     
-    model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_no_arm.urdf'))
-    controllers_config = LaunchConfiguration('controllers_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_controllers.ros2.yaml'))
+    model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_four_dof.urdf'))
+    controllers_config = LaunchConfiguration('controllers_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml'))
 
     # Gazebo
     gazebo = IncludeLaunchDescription(
@@ -66,16 +65,10 @@ def generate_launch_description():
         arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
     )
 
-    diff_drive_controller_spawner = Node(
+    mecanum_drive_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['diff_drive_controller', '--controller-manager', '/controller_manager'],
-    )
-
-    fullbody_controller_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['fullbody_controller', '--controller-manager', '/controller_manager'],
+        arguments=['mecanum_drive_controller', '--controller-manager', '/controller_manager'],
     )
 
     return LaunchDescription([
@@ -84,13 +77,12 @@ def generate_launch_description():
         DeclareLaunchArgument('gui', default_value='true'),
         DeclareLaunchArgument('headless', default_value='false'),
         
-        DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_no_arm.urdf')),
-        DeclareLaunchArgument('controllers_config', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_controllers.ros2.yaml')),
+        DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_four_dof.urdf')),
+        DeclareLaunchArgument('controllers_config', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml')),
         gazebo,
         robot_state_publisher,
         spawn_entity,
         control_node,
         joint_state_broadcaster_spawner,
-        diff_drive_controller_spawner,
-        fullbody_controller_spawner,
+        mecanum_drive_controller_spawner,
     ])
