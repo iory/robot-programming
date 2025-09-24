@@ -24,7 +24,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     gui = LaunchConfiguration('gui', default='true')
     headless = LaunchConfiguration('headless', default='false')
-    world_file = LaunchConfiguration('world_file', default=os.path.join(get_package_share_directory('jedy_bringup'), 'worlds', 'empty.world'))
+    world_file = LaunchConfiguration('world_file', default=os.path.join(get_package_share_directory('jedy_bringup'), 'worlds', 'simple.world'))
     model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_no_arm.urdf'))
     rviz_config = LaunchConfiguration('rviz_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy.rviz'))
     controllers_config = LaunchConfiguration('controllers_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_controllers.ros2.yaml'))
