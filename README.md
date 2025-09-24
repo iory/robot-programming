@@ -78,3 +78,42 @@ See online [manual](http://jsk-enshu.github.io/robot-programming/) for Euslisp m
 
 PDF files are also available from [here](http://jsk-enshu.github.io/robot-programming/robot_programming_manual.pdf)
 
+
+# Setup (ROS2)
+
+```bash
+# Install ROS2 Humble and Gazebo Garden
+# (Follow official installation instructions)
+
+# Install colcon and vcstool
+sudo apt install python3-colcon-common-extensions python3-vcstool
+
+# Create a workspace
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+
+# Clone this repository
+git clone https://github.com/iory/robot-programming.git
+
+# Install dependencies
+cd ~/ros2_ws
+rosdep install --from-paths src --ignore-src -y -r
+
+# Build the workspace
+colcon build
+
+# Source the workspace
+source ~/ros2_ws/install/setup.bash
+```
+
+# Usage (ROS2)
+
+## Start Jedy Gazebo Simulation
+
+```bash
+source ~/ros2_ws/install/setup.bash
+ros2 launch jedy_bringup jedy_gazebo.launch.py
+```
+
+```
+

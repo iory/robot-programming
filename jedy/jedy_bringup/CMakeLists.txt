@@ -1,6 +1,36 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(jedy_bringup)
 
-find_package(catkin REQUIRED COMPONENTS roseus) # add roseus to gen messages
+find_package(ament_cmake REQUIRED)
 
-catkin_package()
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY worlds
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY euslisp
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY kadai
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY scripts
+  DESTINATION share/${PROJECT_NAME}
+)
+
+ament_package()
