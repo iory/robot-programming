@@ -11,9 +11,10 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # Resource paths
     pkg_jedy_bringup = get_package_share_directory('jedy_bringup')
+    pkg_jedy_description = get_package_share_directory('jedy_description')
     
-    # Gazebo-compatible URDF file
-    urdf_file = os.path.join(pkg_jedy_bringup, 'urdf', 'jedy_gazebo_compatible.urdf')
+    # Use the actual jedy URDF file with meshes
+    urdf_file = os.path.join(pkg_jedy_description, 'urdf', 'jedy_four_dof.urdf')
 
     # Gazebo with default world (with ground plane)
     gazebo = IncludeLaunchDescription(
@@ -71,10 +72,10 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/world/default/model/jedy/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
+            '/model/jedy/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
         ],
         remappings=[
-            ('/world/default/model/jedy/joint_state', '/joint_states_gazebo')
+            ('/model/jedy/joint_state', '/joint_states_gazebo')
         ],
         output='screen'
     )
