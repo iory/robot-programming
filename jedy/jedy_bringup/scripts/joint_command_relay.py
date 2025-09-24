@@ -34,10 +34,10 @@ class JointCommandRelay(Node):
         for joint_name in self.joint_names:
             if 'mechanum' in joint_name:
                 # Velocity commands for continuous joints (wheels)
-                topic_name = f'/model/jedy/joint/{joint_name}/cmd_vel'
+                topic_name = f'/world/default/model/jedy/joint/{joint_name}/cmd_vel'
             else:
                 # Position commands for revolute joints
-                topic_name = f'/model/jedy/joint/{joint_name}/cmd_pos'
+                topic_name = f'/world/default/model/jedy/joint/{joint_name}/cmd_pos'
             
             self.joint_publishers[joint_name] = self.create_publisher(
                 Float64,

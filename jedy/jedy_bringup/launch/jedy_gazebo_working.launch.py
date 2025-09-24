@@ -66,15 +66,15 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Bridge for joint states (Gazebo -> ROS2)
+    # Bridge for joint states (Gazebo -> ROS2)  
     bridge_joint_states = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/model/jedy/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
+            '/world/default/model/jedy/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
         ],
         remappings=[
-            ('/model/jedy/joint_state', '/joint_states_gazebo')
+            ('/world/default/model/jedy/joint_state', '/joint_states_gazebo')
         ],
         output='screen'
     )
@@ -84,13 +84,13 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/model/jedy/joint/rarm_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/jedy/joint/larm_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/jedy/joint/head_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/jedy/joint/mechanum_joint1/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/jedy/joint/mechanum_joint2/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/jedy/joint/mechanum_joint3/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/jedy/joint/mechanum_joint4/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+            '/world/default/model/jedy/joint/rarm_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+            '/world/default/model/jedy/joint/larm_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+            '/world/default/model/jedy/joint/head_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+            '/world/default/model/jedy/joint/mechanum_joint1/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+            '/world/default/model/jedy/joint/mechanum_joint2/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+            '/world/default/model/jedy/joint/mechanum_joint3/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+            '/world/default/model/jedy/joint/mechanum_joint4/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
         ],
         output='screen'
     )
