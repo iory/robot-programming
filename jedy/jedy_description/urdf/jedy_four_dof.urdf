@@ -419,7 +419,7 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
+      <material name="mechanum___unnamed_material_1"/>
       <origin xyz="3.62670863096242e-16 -0.0234999999999999 1.90166560887181e-18" rpy="-1.5707963267949006 6.67140997056125e-17 -1.57079632679486"/>
     </visual>
     <collision>
@@ -439,7 +439,7 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
+      <material name="mechanum___unnamed_material_2"/>
       <origin xyz="-0.0539999999999978 -0.0657500000000021 -0.102" rpy="-1.57079632679486 -4.0188125235906916e-14 -1.57079632679492"/>
     </visual>
     <collision>
@@ -459,7 +459,7 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link2.dae"/>
       </geometry>
-      <material name="__unnamed_material_3"/>
+      <material name="mechanum___unnamed_material_3"/>
       <origin xyz="-0.0539999999999662 0.0657499999999586 -0.102" rpy="-1.5707963267949006 -2.131628307790371e-15 -1.57079632679492"/>
     </visual>
     <collision>
