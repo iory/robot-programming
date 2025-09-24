@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot name="jedy_robot">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/base_link.dae"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+      <origin xyz="0.0 0.0 0.0" rpy="1.5708 0 1.5708"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="rarm_link0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/rarm_link0.dae"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+      <origin xyz="0.0075 0.0505 -0.0515" rpy="1.5708 0 1.5708"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.02" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="dummy_link_rarm"/>
+  
+  <link name="larm_link0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/larm_link0.dae"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+      <origin xyz="0.0075 -0.0505 -0.0515" rpy="1.5708 0 1.5708"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.02" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="dummy_link_larm"/>
+  
+  <link name="head_link0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/head_link0.dae"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+      <origin xyz="0.0075 0 -0.069" rpy="1.5708 0 1.5708"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="dummy_link_head"/>
+  <link name="dummy_link_rleg"/>
+  <link name="dummy_link_lleg"/>
+  
+  <!-- Joints -->
+  <joint name="base_to_rarm" type="fixed">
+    <parent link="base_link"/>
+    <child link="rarm_link0"/>
+    <origin xyz="-0.0075 -0.0505 0.0515" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="rarm_to_dummy" type="fixed">
+    <parent link="rarm_link0"/>
+    <child link="dummy_link_rarm"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="base_to_larm" type="fixed">
+    <parent link="base_link"/>
+    <child link="larm_link0"/>
+    <origin xyz="-0.0075 0.0505 0.0515" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="larm_to_dummy" type="fixed">
+    <parent link="larm_link0"/>
+    <child link="dummy_link_larm"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="base_to_head" type="fixed">
+    <parent link="base_link"/>
+    <child link="head_link0"/>
+    <origin xyz="-0.0075 0 0.069" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="head_to_dummy" type="fixed">
+    <parent link="head_link0"/>
+    <child link="dummy_link_head"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="base_to_rleg_dummy" type="fixed">
+    <parent link="base_link"/>
+    <child link="dummy_link_rleg"/>
+    <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="base_to_lleg_dummy" type="fixed">
+    <parent link="base_link"/>
+    <child link="dummy_link_lleg"/>
+    <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+  </joint>
+</robot>

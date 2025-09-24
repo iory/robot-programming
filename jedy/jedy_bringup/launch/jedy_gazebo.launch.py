@@ -30,7 +30,7 @@ def generate_launch_description():
     gui = LaunchConfiguration('gui', default='true')
     headless = LaunchConfiguration('headless', default='false')
     
-    model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_four_dof.urdf'))
+    model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_four_dof_package.urdf'))
     controllers_config = LaunchConfiguration('controllers_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml'))
 
     # Gazebo with safer settings
@@ -86,7 +86,7 @@ def generate_launch_description():
         DeclareLaunchArgument('gui', default_value='true'),
         DeclareLaunchArgument('headless', default_value='false'),
         
-        DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_four_dof.urdf')),
+        DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_four_dof_package.urdf')),
         DeclareLaunchArgument('controllers_config', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml')),
         gazebo,
         robot_state_publisher,
