@@ -10,7 +10,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_body_module/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.57079632679475 1.18026838242259e-15 1.5707963267949006"/>
     </visual>
     <collision>
@@ -30,7 +29,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_body_module/rarm_link0.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="0.00749999999999255 0.0505000000000001 -0.0515000000000008" rpy="1.57079632679489 1.98695906687307e-15 1.5707963267949006"/>
     </visual>
     <collision>
@@ -51,7 +49,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_body_module/larm_link0.dae"/>
       </geometry>
-      <material name="__unnamed_material_3"/>
       <origin xyz="0.00750000000000694 -0.0505000000000002 -0.0514999999999991" rpy="1.5707963267946097 1.96493683060465e-15 1.5707963267949006"/>
     </visual>
     <collision>
