@@ -8,14 +8,14 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.57079632679475 1.18026838242259e-15 1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="1.57079632679475 1.18026838242259e-15 1.5707963267949006"/>
     </collision>
@@ -23,19 +23,19 @@
   <link name="rarm_link0">
     <inertial>
       <origin xyz="-0.00062384868058613 -0.0096274447261538 1.57437795288082e-05" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0139002702415581"/>
-      <inertia ixx="2.03426275242921e-06" ixy="1.26404063728194e-08" ixz="-1.74810057443915e-09" iyy="3.77774740349678e-06" iyz="2.42073644313645e-10" izz="1.97425841156435e-06"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="1.26404063728194e-08" ixz="-1.74810057443915e-09" iyy="0.001" iyz="2.42073644313645e-10" izz="0.001"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/rarm_link0.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/rarm_link0.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="0.00749999999999255 0.0505000000000001 -0.0515000000000008" rpy="1.57079632679489 1.98695906687307e-15 1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/rarm_link0.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/rarm_link0.dae"/>
       </geometry>
       <origin xyz="0.00749999999999255 0.0505000000000001 -0.0515000000000008" rpy="1.57079632679489 1.98695906687307e-15 1.5707963267949006"/>
     </collision>
@@ -44,19 +44,19 @@
   <link name="larm_link0">
     <inertial>
       <origin xyz="-0.000623848680586079 0.00962744472615387 -1.57437795286902e-05" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0139002702415604"/>
-      <inertia ixx="2.03426275242921e-06" ixy="-1.26404063728197e-08" ixz="1.74810057444398e-09" iyy="3.77774740349679e-06" iyz="2.42073644313781e-10" izz="1.97425841156437e-06"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="-1.26404063728197e-08" ixz="1.74810057444398e-09" iyy="3.77774740349679e-06" iyz="2.42073644313781e-10" izz="1.97425841156437e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/larm_link0.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/larm_link0.dae"/>
       </geometry>
       <material name="__unnamed_material_3"/>
       <origin xyz="0.00750000000000694 -0.0505000000000002 -0.0514999999999991" rpy="1.5707963267946097 1.96493683060465e-15 1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/larm_link0.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/larm_link0.dae"/>
       </geometry>
       <origin xyz="0.00750000000000694 -0.0505000000000002 -0.0514999999999991" rpy="1.5707963267946097 1.96493683060465e-15 1.5707963267949006"/>
     </collision>
@@ -65,19 +65,19 @@
   <link name="head_link0">
     <inertial>
       <origin xyz="-0.000623848680585341 1.57437795281633e-05 0.00962744472615393" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0139002702415607"/>
+      <mass value="0.1"/>
       <inertia ixx="2.03426275242922e-06" ixy="-1.74810057442608e-09" ixz="-1.2640406372804e-08" iyy="1.97425841156437e-06" iyz="-2.42073644314336e-10" izz="3.77774740349681e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/head_link0.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/head_link0.dae"/>
       </geometry>
       <material name="__unnamed_material_4"/>
       <origin xyz="0.00749999999999764 3.14057815610015e-16 -0.0690000000000014" rpy="1.5707963267949099 1.31905250966292e-44 1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_body_module/head_link0.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_body_module/head_link0.dae"/>
       </geometry>
       <origin xyz="0.00749999999999764 3.14057815610015e-16 -0.0690000000000014" rpy="1.5707963267949099 1.31905250966292e-44 1.5707963267949006"/>
     </collision>
@@ -88,19 +88,19 @@
   <link name="rarm_module1_base_link">
     <inertial>
       <origin xyz="-0.000134497161737864 0.000400071445154042 0.0105420183063919" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0119463231340018"/>
-      <inertia ixx="1.3214507878407e-06" ixy="-3.86356506946435e-09" ixz="2.05040461335073e-09" iyy="1.41637193279521e-06" iyz="-9.19775849787009e-09" izz="1.57065215538619e-06"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.0005" ixy="-3.86356506946435e-09" ixz="2.05040461335073e-09" iyy="0.0005" iyz="-9.19775849787009e-09" izz="0.0005"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverright_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -0.0 -1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverright_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -0.0 -1.5707963267949006"/>
     </collision>
@@ -108,19 +108,19 @@
   <link name="rarm_module1_link1">
     <inertial>
       <origin xyz="0.000426772405828953 -0.0170876545209993 0.00800936760164068" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0552019977106494"/>
-      <inertia ixx="9.04668269804154e-06" ixy="6.1235126112905e-09" ixz="-1.730115805177e-08" iyy="9.62616788978217e-06" iyz="-1.4095109748622e-07" izz="7.53379045428111e-06"/>
+      <mass value="0.2"/>
+      <inertia ixx="0.005" ixy="6.1235126112905e-09" ixz="-1.730115805177e-08" iyy="0.005" iyz="-1.4095109748622e-07" izz="0.005"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverright_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="-1.71209796808181e-14 -1.42791371668497e-13 -0.0349999999999999" rpy="-1.5707963267954 -5.713721933430832e-12 -1.57079632679487"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverright_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/link1.dae"/>
       </geometry>
       <origin xyz="-1.71209796808181e-14 -1.42791371668497e-13 -0.0349999999999999" rpy="-1.5707963267954 -5.713721933430832e-12 -1.57079632679487"/>
     </collision>
@@ -128,19 +128,19 @@
   <link name="rarm_module1_link2">
     <inertial>
       <origin xyz="0.0271274447261539 -1.57437794753637e-05 -0.000623848680583995" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0139002702415665"/>
+      <mass value="0.1"/>
       <inertia ixx="3.7777474034968e-06" ixy="2.42073644246382e-10" ixz="-1.26404063728202e-08" iyy="1.97425841156439e-06" iyz="1.74810057475977e-09" izz="2.03426275242919e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverright_module_cover/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/link2.dae"/>
       </geometry>
       <material name="__unnamed_material_3"/>
       <origin xyz="-1.71209796808181e-14 -1.42791371668497e-13 -0.0349999999999999" rpy="-1.5707963267954 -5.713721933430832e-12 -1.57079632679487"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverright_module_cover/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/link2.dae"/>
       </geometry>
       <origin xyz="-1.71209796808181e-14 -1.42791371668497e-13 -0.0349999999999999" rpy="-1.5707963267954 -5.713721933430832e-12 -1.57079632679487"/>
     </collision>
@@ -149,19 +149,19 @@
   <link name="rarm_module2_base_link">
     <inertial>
       <origin xyz="-0.000411800746635972 -5.52094127738757e-05 0.0263536544041214" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.038356588287215"/>
+      <mass value="0.15"/>
       <inertia ixx="6.18154286345898e-06" ixy="-1.64060921401381e-07" ixz="9.77386365266943e-08" iyy="7.10518635911435e-06" iyz="2.96530772055932e-08" izz="5.13683804321701e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -1.23259516440783e-32 -1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -1.23259516440783e-32 -1.5707963267949006"/>
     </collision>
@@ -169,19 +169,19 @@
   <link name="rarm_module2_link1">
     <inertial>
       <origin xyz="0.000467736030116235 7.13567235312983e-05 0.0261305564474293" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0156652005671847"/>
+      <mass value="0.08"/>
       <inertia ixx="2.35170209167828e-06" ixy="-1.01232987995901e-09" ixz="1.00980108435331e-08" iyy="2.27219642019126e-06" iyz="8.62534918894064e-10" izz="3.78531001851385e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="-4.78706382828717e-18 -2.27356509549241e-13 -0.04" rpy="-1.5707963267949006 -5.684376829408401e-12 -1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
       </geometry>
       <origin xyz="-4.78706382828717e-18 -2.27356509549241e-13 -0.04" rpy="-1.5707963267949006 -5.684376829408401e-12 -1.5707963267949006"/>
     </collision>
@@ -190,19 +190,19 @@
   <link name="right_hand_base_link">
     <inertial>
       <origin xyz="5.47111203139342e-05 -0.0233987048672739 0.00348357744627333" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0323742495584158"/>
+      <mass value="0.12"/>
       <inertia ixx="3.75458376456736e-06" ixy="-1.84805787703484e-08" ixz="1.39150688098176e-08" iyy="4.31048459053728e-06" iyz="-2.99593714772955e-07" izz="3.1613584567176e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 5.29012147897801e-16 -2.35785414704303e-18"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 5.29012147897801e-16 -2.35785414704303e-18"/>
     </collision>
@@ -210,19 +210,19 @@
   <link name="right_hand_link1">
     <inertial>
       <origin xyz="0.00021921088593185 -0.0287660598229269 -0.0286628174537788" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.00827607897427458"/>
+      <mass value="0.05"/>
       <inertia ixx="1.6454910095978e-06" ixy="-2.15742350052154e-13" ixz="5.20848129201374e-13" iyy="4.13324259445914e-07" iyz="-2.90081029377512e-07" izz="1.55789899720374e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="7.01138565488769e-16 -0.0117372282582485 -0.0348029710109983" rpy="1.57079632679517 -1.02096043843821e-14 1.99259294485139e-16"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link1.dae"/>
       </geometry>
       <origin xyz="7.01138565488769e-16 -0.0117372282582485 -0.0348029710109983" rpy="1.57079632679517 -1.02096043843821e-14 1.99259294485139e-16"/>
     </collision>
@@ -230,19 +230,19 @@
   <link name="right_hand_link2">
     <inertial>
       <origin xyz="-0.000219210885930649 -0.00528734605917578 -0.040943124568227" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.00827607897427456"/>
+      <mass value="0.05"/>
       <inertia ixx="1.6454910095978e-06" ixy="2.15742371425819e-13" ixz="5.20848134299036e-13" iyy="4.13324259445597e-07" iyz="2.90081029376888e-07" izz="1.55789899720406e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link2.dae"/>
       </geometry>
       <material name="__unnamed_material_3"/>
       <origin xyz="5.31057674077393e-16 0.0117414855054993 -0.0348029710109982" rpy="1.57079632679517 -6.73902532357641e-15 -1.02413966552629e-15"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link2.dae"/>
       </geometry>
       <origin xyz="5.31057674077393e-16 0.0117414855054993 -0.0348029710109982" rpy="1.57079632679517 -6.73902532357641e-15 -1.02413966552629e-15"/>
     </collision>
@@ -250,19 +250,19 @@
   <link name="larm_module1_base_link">
     <inertial>
       <origin xyz="-0.000134497161739125 0.000400071445156966 0.0105420183063958" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0119463231340018"/>
-      <inertia ixx="1.3214507878407e-06" ixy="-3.86356506944729e-09" ixz="2.05040461347478e-09" iyy="1.41637193279517e-06" iyz="-9.19775849804079e-09" izz="1.57065215538623e-06"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.0005" ixy="-3.86356506944729e-09" ixz="2.05040461347478e-09" iyy="1.41637193279517e-06" iyz="-9.19775849804079e-09" izz="1.57065215538623e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverleft_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -0.0 -1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverleft_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -0.0 -1.5707963267949006"/>
     </collision>
@@ -275,14 +275,14 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="1.57130087187741e-14 1.70916709453945e-13 -0.035000000000035" rpy="-1.57079632679494 6.500314164004082e-12 -1.57079632679487"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/link1.dae"/>
       </geometry>
       <origin xyz="1.57130087187741e-14 1.70916709453945e-13 -0.035000000000035" rpy="-1.57079632679494 6.500314164004082e-12 -1.57079632679487"/>
     </collision>
@@ -295,14 +295,14 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/link2.dae"/>
       </geometry>
       <material name="__unnamed_material_3"/>
       <origin xyz="1.57130087187741e-14 -2.80350352117951e-14 -0.035000000000035" rpy="-1.57079632679494 8.159786021314742e-13 -1.57079632679487"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/link2.dae"/>
       </geometry>
       <origin xyz="1.57130087187741e-14 -2.80350352117951e-14 -0.035000000000035" rpy="-1.57079632679494 8.159786021314742e-13 -1.57079632679487"/>
     </collision>
@@ -311,19 +311,19 @@
   <link name="larm_module2_base_link">
     <inertial>
       <origin xyz="-0.000411800746635972 -5.52094127738757e-05 0.0263536544041214" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.038356588287215"/>
+      <mass value="0.15"/>
       <inertia ixx="6.18154286345898e-06" ixy="-1.64060921401381e-07" ixz="9.77386365266943e-08" iyy="7.10518635911435e-06" iyz="2.96530772055932e-08" izz="5.13683804321701e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -1.23259516440783e-32 -1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -1.23259516440783e-32 -1.5707963267949006"/>
     </collision>
@@ -331,19 +331,19 @@
   <link name="larm_module2_link1">
     <inertial>
       <origin xyz="0.000467736030116235 7.13567235312983e-05 0.0261305564474293" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0156652005671847"/>
+      <mass value="0.08"/>
       <inertia ixx="2.35170209167828e-06" ixy="-1.01232987995901e-09" ixz="1.00980108435331e-08" iyy="2.27219642019126e-06" iyz="8.62534918894064e-10" izz="3.78531001851385e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="-4.78706382828717e-18 -2.27356509549241e-13 -0.04" rpy="-1.5707963267949006 -5.684376829408401e-12 -1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
       </geometry>
       <origin xyz="-4.78706382828717e-18 -2.27356509549241e-13 -0.04" rpy="-1.5707963267949006 -5.684376829408401e-12 -1.5707963267949006"/>
     </collision>
@@ -352,19 +352,19 @@
   <link name="left_hand_base_link">
     <inertial>
       <origin xyz="5.47111203139342e-05 -0.0233987048672739 0.00348357744627333" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.0323742495584158"/>
+      <mass value="0.12"/>
       <inertia ixx="3.75458376456736e-06" ixy="-1.84805787703484e-08" ixz="1.39150688098176e-08" iyy="4.31048459053728e-06" iyz="-2.99593714772955e-07" izz="3.1613584567176e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 5.29012147897801e-16 -2.35785414704303e-18"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 5.29012147897801e-16 -2.35785414704303e-18"/>
     </collision>
@@ -372,19 +372,19 @@
   <link name="left_hand_link1">
     <inertial>
       <origin xyz="0.00021921088593185 -0.0287660598229269 -0.0286628174537788" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.00827607897427458"/>
+      <mass value="0.05"/>
       <inertia ixx="1.6454910095978e-06" ixy="-2.15742350052154e-13" ixz="5.20848129201374e-13" iyy="4.13324259445914e-07" iyz="-2.90081029377512e-07" izz="1.55789899720374e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="7.01138565488769e-16 -0.0117372282582485 -0.0348029710109983" rpy="1.57079632679517 -1.02096043843821e-14 1.99259294485139e-16"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link1.dae"/>
       </geometry>
       <origin xyz="7.01138565488769e-16 -0.0117372282582485 -0.0348029710109983" rpy="1.57079632679517 -1.02096043843821e-14 1.99259294485139e-16"/>
     </collision>
@@ -392,19 +392,19 @@
   <link name="left_hand_link2">
     <inertial>
       <origin xyz="-0.000219210885930649 -0.00528734605917578 -0.040943124568227" rpy="0.0 -0.0 0.0"/>
-      <mass value="0.00827607897427456"/>
+      <mass value="0.05"/>
       <inertia ixx="1.6454910095978e-06" ixy="2.15742371425819e-13" ixz="5.20848134299036e-13" iyy="4.13324259445597e-07" iyz="2.90081029376888e-07" izz="1.55789899720406e-06"/>
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link2.dae"/>
       </geometry>
       <material name="__unnamed_material_3"/>
       <origin xyz="5.31057674077393e-16 0.0117414855054993 -0.0348029710109982" rpy="1.57079632679517 -6.73902532357641e-15 -1.02413966552629e-15"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_hand_module/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_hand_module/link2.dae"/>
       </geometry>
       <origin xyz="5.31057674077393e-16 0.0117414855054993 -0.0348029710109982" rpy="1.57079632679517 -6.73902532357641e-15 -1.02413966552629e-15"/>
     </collision>
@@ -417,7 +417,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_mechanum_module/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="3.62670863096242e-16 -0.0234999999999999 1.90166560887181e-18" rpy="-1.5707963267949006 6.67140997056125e-17 -1.57079632679486"/>
@@ -437,7 +437,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_mechanum_module/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="-0.0539999999999978 -0.0657500000000021 -0.102" rpy="-1.57079632679486 -4.0188125235906916e-14 -1.57079632679492"/>
@@ -457,7 +457,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_mechanum_module/link2.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link2.dae"/>
       </geometry>
       <material name="__unnamed_material_3"/>
       <origin xyz="-0.0539999999999662 0.0657499999999586 -0.102" rpy="-1.5707963267949006 -2.131628307790371e-15 -1.57079632679492"/>
@@ -477,7 +477,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_mechanum_module/link3.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link3.dae"/>
       </geometry>
       <material name="__unnamed_material_4"/>
       <origin xyz="0.0539999999999998 -0.0657500000000001 -0.102" rpy="-1.5707963267949006 -2.9117222201804313e-15 -1.57079632679492"/>
@@ -497,7 +497,7 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_mechanum_module/link4.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link4.dae"/>
       </geometry>
       <material name="__unnamed_material_5"/>
       <origin xyz="0.0539999999999999 0.0657499999999995 -0.102" rpy="-1.57079632679486 -3.973915661273562e-14 -1.57079632679492"/>
@@ -517,14 +517,14 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_20mmhead_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_20mmhead_module_cover/base_link.dae"/>
       </geometry>
       <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 2.0521908455613e-16 1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_20mmhead_module_cover/base_link.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_20mmhead_module_cover/base_link.dae"/>
       </geometry>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 2.0521908455613e-16 1.5707963267949006"/>
     </collision>
@@ -537,14 +537,14 @@
     </inertial>
     <visual>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_20mmhead_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_20mmhead_module_cover/link1.dae"/>
       </geometry>
       <material name="__unnamed_material_2"/>
       <origin xyz="1.01673274679116e-16 6.96912263350572e-18 -0.0395" rpy="1.5707963267949006 -4.30378006960599e-16 1.5707963267949006"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="model://jedy_description/meshes/screw_20mmhead_module_cover/link1.dae"/>
+        <mesh filename="package://jedy_description/meshes/screw_20mmhead_module_cover/link1.dae"/>
       </geometry>
       <origin xyz="1.01673274679116e-16 6.96912263350572e-18 -0.0395" rpy="1.5707963267949006 -4.30378006960599e-16 1.5707963267949006"/>
     </collision>
