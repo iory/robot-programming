@@ -13,11 +13,17 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # Set Gazebo resource path
     pkg_jedy_bringup = get_package_share_directory('jedy_bringup')
+    pkg_jedy_description = get_package_share_directory('jedy_description')
     model_path = os.path.join(pkg_jedy_bringup, 'worlds', 'model')
+
+    # ':' で区切られた複数のパスを設定
+    # os.path.dirname(pkg_jedy_description) を追加して、'jedy_description'モデルを見つけられるようにする
+    resource_paths = [model_path, os.path.dirname(pkg_jedy_description)]
+
     if 'GZ_SIM_RESOURCE_PATH' in os.environ:
-        gz_resource_path = os.environ['GZ_SIM_RESOURCE_PATH'] + ':' + model_path
+        gz_resource_path = os.environ['GZ_SIM_RESOURCE_PATH'] + ':' + ':'.join(resource_paths)
     else:
-        gz_resource_path = model_path
+        gz_resource_path = ':'.join(resource_paths)
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
