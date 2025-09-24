@@ -1,0 +1,1108 @@
+<sdf version='1.7'>
+  <model name='test_robot'>
+    <link name='base_link'>
+      <inertial>
+        <pose>-0.010901 0.002981 0.000941 0 -0 0</pose>
+        <mass>0.758422</mass>
+        <inertia>
+          <ixx>0.0022817</ixx>
+          <ixy>1.40493e-05</ixy>
+          <ixz>0.000291682</ixz>
+          <iyy>0.00219175</iyy>
+          <iyz>-7.35245e-05</iyz>
+          <izz>0.000369234</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 1.5708 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__mechanum_base_link_collision_1'>
+        <pose>0 -0 -0.0105 1.5708 0 1.5708</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.03</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 1.5708 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__mechanum_base_link_visual_1'>
+        <pose>0 -0 -0.0105 1.5708 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_mechanum_module/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='mechanum_joint1' type='revolute'>
+      <pose relative_to='base_link'>0.054 -0.06575 -0.1125 3.14159 -0 0</pose>
+      <parent>base_link</parent>
+      <child>mechanum_link1</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>0.48</effort>
+          <velocity>6.55</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='mechanum_link1'>
+      <pose relative_to='mechanum_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.000357 -0 0 -0 0</pose>
+        <mass>0.0489086</mass>
+        <inertia>
+          <ixx>6.26355e-06</ixx>
+          <ixy>9.12753e-13</ixy>
+          <ixz>1.82884e-12</ixz>
+          <iyy>6.60526e-06</iyy>
+          <iyz>4.55557e-11</iyz>
+          <izz>6.26356e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='mechanum_link1_collision'>
+        <pose>-0.054 -0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.03</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='mechanum_link1_visual'>
+        <pose>-0.054 -0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_mechanum_module/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='mechanum_joint2' type='revolute'>
+      <pose relative_to='base_link'>0.054 0.06575 -0.1125 3.14159 -0 0</pose>
+      <parent>base_link</parent>
+      <child>mechanum_link2</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>0.48</effort>
+          <velocity>6.55</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='mechanum_link2'>
+      <pose relative_to='mechanum_joint2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 -0.000357 -0 0 -0 0</pose>
+        <mass>0.0489082</mass>
+        <inertia>
+          <ixx>6.26347e-06</ixx>
+          <ixy>-2.93818e-12</ixy>
+          <ixz>-8.28244e-13</ixz>
+          <iyy>6.60514e-06</iyy>
+          <iyz>-5.13759e-11</iyz>
+          <izz>6.26348e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='mechanum_link2_collision'>
+        <pose>-0.054 0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.03</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='mechanum_link2_visual'>
+        <pose>-0.054 0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_mechanum_module/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='mechanum_joint3' type='revolute'>
+      <pose relative_to='base_link'>-0.054 -0.06575 -0.1125 3.14159 -0 0</pose>
+      <parent>base_link</parent>
+      <child>mechanum_link3</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>0.48</effort>
+          <velocity>6.55</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='mechanum_link3'>
+      <pose relative_to='mechanum_joint3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0.000357 -0 0 -0 0</pose>
+        <mass>0.0489082</mass>
+        <inertia>
+          <ixx>6.26347e-06</ixx>
+          <ixy>-2.93818e-12</ixy>
+          <ixz>8.28244e-13</ixz>
+          <iyy>6.60514e-06</iyy>
+          <iyz>5.13759e-11</iyz>
+          <izz>6.26348e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='mechanum_link3_collision'>
+        <pose>0.054 -0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.03</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='mechanum_link3_visual'>
+        <pose>0.054 -0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_mechanum_module/link3.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='mechanum_joint4' type='revolute'>
+      <pose relative_to='base_link'>-0.054 0.06575 -0.1125 3.14159 -0 0</pose>
+      <parent>base_link</parent>
+      <child>mechanum_link4</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>0.48</effort>
+          <velocity>6.55</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='mechanum_link4'>
+      <pose relative_to='mechanum_joint4'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0.000357 -0 0 -0 0</pose>
+        <mass>0.0489086</mass>
+        <inertia>
+          <ixx>6.26355e-06</ixx>
+          <ixy>9.12753e-13</ixy>
+          <ixz>-1.82884e-12</ixz>
+          <iyy>6.60526e-06</iyy>
+          <iyz>-4.55557e-11</iyz>
+          <izz>6.26356e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='mechanum_link4_collision'>
+        <pose>0.054 0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.03</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='mechanum_link4_visual'>
+        <pose>0.054 0.06575 -0.102 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_mechanum_module/link4.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='head_joint0' type='revolute'>
+      <pose relative_to='base_link'>-0.0075 0 0.069 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>head_link0</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-2.35</lower>
+          <upper>2.35</upper>
+          <effort>0.48</effort>
+          <velocity>6.55</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='head_link0'>
+      <pose relative_to='head_joint0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000473 2.2e-05 0.016343 0 -0 0</pose>
+        <mass>0.130965</mass>
+        <inertia>
+          <ixx>0.00102296</ixx>
+          <ixy>7.43413e-09</ixy>
+          <ixz>-4.23125e-07</ixz>
+          <iyy>0.00102293</iyy>
+          <iyz>2.30478e-09</iyz>
+          <izz>0.00100389</izz>
+        </inertia>
+      </inertial>
+      <collision name='head_link0_collision'>
+        <pose>0.0075 0 -0.069 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/head_link0.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='head_link0_fixed_joint_lump__head_module1_base_link_collision_1'>
+        <pose>0 0 0.0135 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_20mmhead_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='head_link0_visual'>
+        <pose>0.0075 0 -0.069 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/head_link0.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='head_link0_fixed_joint_lump__head_module1_base_link_visual_1'>
+        <pose>0 0 0.0135 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_20mmhead_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='head_module1_joint1' type='revolute'>
+      <pose relative_to='head_link0'>0 0 0.053 0 -0 0</pose>
+      <parent>head_link0</parent>
+      <child>head_module1_link1</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-1.57</lower>
+          <upper>1.57</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='head_module1_link1'>
+      <pose relative_to='head_module1_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.004497 4.4e-05 0.049171 0 -0 0</pose>
+        <mass>0.18518</mass>
+        <inertia>
+          <ixx>4.6374e-05</ixx>
+          <ixy>4.8051e-08</ixy>
+          <ixz>2.7826e-08</ixz>
+          <iyy>2.6267e-05</iyy>
+          <iyz>-2.3292e-08</iyz>
+          <izz>2.8022e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='head_module1_link1_collision'>
+        <pose>0 0 -0.0395 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_20mmhead_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='head_module1_link1_visual'>
+        <pose>0 0 -0.0395 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_20mmhead_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='larm_joint0' type='revolute'>
+      <pose relative_to='base_link'>-0.0075 0.0505 0.0515 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>larm_link0</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-2.35</lower>
+          <upper>2.35</upper>
+          <effort>0.48</effort>
+          <velocity>6.55</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='larm_link0'>
+      <pose relative_to='larm_joint0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000283 0.014432 -5.5e-05 0 -0 0</pose>
+        <mass>0.15</mass>
+        <inertia>
+          <ixx>0.00100834</ixx>
+          <ixy>-5.01177e-07</ixy>
+          <ixz>1.89568e-10</ixz>
+          <iyy>0.00100161</iyy>
+          <iyz>5.91097e-08</iyz>
+          <izz>0.00150696</izz>
+        </inertia>
+      </inertial>
+      <collision name='larm_link0_collision'>
+        <pose>0.0075 -0.0505 -0.0515 1.5708 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/larm_link0.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='larm_link0_fixed_joint_lump__larm_module1_base_link_collision_1'>
+        <pose>0 0.0135 0 0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverleft_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='larm_link0_visual'>
+        <pose>0.0075 -0.0505 -0.0515 1.5708 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/larm_link0.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='larm_link0_fixed_joint_lump__larm_module1_base_link_visual_1'>
+        <pose>0 0.0135 0 0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverleft_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='larm_module1_joint1' type='revolute'>
+      <pose relative_to='larm_link0'>0 0.0485 -0 -1.5708 -1.5708 0</pose>
+      <parent>larm_link0</parent>
+      <child>larm_module1_link1</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-1.57</lower>
+          <upper>0.087</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='larm_module1_link1'>
+      <pose relative_to='larm_module1_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000516 -0.017297 0.007999 0 -0 0</pose>
+        <mass>0.054973</mass>
+        <inertia>
+          <ixx>9.04188e-06</ixx>
+          <ixy>8.0746e-09</ixy>
+          <ixz>2.48153e-08</ixz>
+          <iyy>9.61112e-06</iyy>
+          <iyz>-1.34463e-07</iyz>
+          <izz>7.52256e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='larm_module1_link1_collision'>
+        <pose>0 0 -0.035 -1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='larm_module1_link1_visual'>
+        <pose>0 0 -0.035 -1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='larm_module1_joint2' type='revolute'>
+      <pose relative_to='larm_module1_link1'>0 0 0 0 -0 0</pose>
+      <parent>larm_module1_link1</parent>
+      <child>larm_module1_link2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-2.35</lower>
+          <upper>2.35</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='larm_module1_link2'>
+      <pose relative_to='larm_module1_joint2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.05479 5.2e-05 0.000324 0 -0 0</pose>
+        <mass>0.1639</mass>
+        <inertia>
+          <ixx>8.92825e-06</ixx>
+          <ixy>4.50705e-08</ixy>
+          <ixz>5.08607e-07</ixz>
+          <iyy>2.07157e-05</iyy>
+          <iyz>-1.66329e-07</iyz>
+          <izz>1.98384e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='larm_module1_link2_collision'>
+        <pose>0 -0 -0.035 -1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='larm_module1_link2_fixed_joint_lump__larm_module2_base_link_collision_1'>
+        <pose>-0.031 0 0 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='larm_module1_link2_visual'>
+        <pose>0 -0 -0.035 -1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverleft_module_cover/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='larm_module1_link2_fixed_joint_lump__larm_module2_base_link_visual_1'>
+        <pose>-0.031 0 0 3.14159 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='larm_module2_joint1' type='revolute'>
+      <pose relative_to='larm_module1_link2'>-0.071 -0 0 3.14159 1.5708 0</pose>
+      <parent>larm_module1_link2</parent>
+      <child>larm_module2_link1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1.78</lower>
+          <upper>1.78</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='larm_module2_link1'>
+      <pose relative_to='larm_module2_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.013852 -4e-06 0.032342 0 -0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>1.18078e-05</ixx>
+          <ixy>-1.26954e-07</ixy>
+          <ixz>1.15708e-05</ixz>
+          <iyy>3.85128e-05</iyy>
+          <iyz>4.95963e-08</iyz>
+          <izz>3.42886e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='larm_module2_link1_collision'>
+        <pose>-0 -0 -0.04 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='larm_module2_link1_fixed_joint_lump__left_hand_base_link_collision_1'>
+        <pose>0 0 0.033 1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='larm_module2_link1_visual'>
+        <pose>-0 -0 -0.04 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='larm_module2_link1_fixed_joint_lump__left_hand_base_link_visual_1'>
+        <pose>0 0 0.033 1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='left_hand_joint1' type='revolute'>
+      <pose relative_to='larm_module2_link1'>0.011737 -0 0.067803 0 0 -1.5708</pose>
+      <parent>larm_module2_link1</parent>
+      <child>left_hand_link1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.43</lower>
+          <upper>1.57</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_hand_link1'>
+      <pose relative_to='left_hand_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.000219 -0.028766 -0.028663 0 -0 0</pose>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>1.64549e-06</ixx>
+          <ixy>-2.15742e-13</ixy>
+          <ixz>5.20848e-13</ixz>
+          <iyy>4.13324e-07</iyy>
+          <iyz>-2.90081e-07</iyz>
+          <izz>1.5579e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_hand_link1_collision'>
+        <pose>0 -0.011737 -0.034803 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='left_hand_link1_visual'>
+        <pose>0 -0.011737 -0.034803 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='left_hand_joint2' type='revolute'>
+      <pose relative_to='larm_module2_link1'>-0.011741 0 0.067803 0 0 -1.5708</pose>
+      <parent>larm_module2_link1</parent>
+      <child>left_hand_link2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.43</lower>
+          <upper>1.57</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_hand_link2'>
+      <pose relative_to='left_hand_joint2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000219 -0.005287 -0.040943 0 -0 0</pose>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>1.64549e-06</ixx>
+          <ixy>2.15742e-13</ixy>
+          <ixz>5.20848e-13</ixz>
+          <iyy>4.13324e-07</iyy>
+          <iyz>2.90081e-07</iyz>
+          <izz>1.5579e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_hand_link2_collision'>
+        <pose>0 0.011741 -0.034803 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='left_hand_link2_visual'>
+        <pose>0 0.011741 -0.034803 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='rarm_joint0' type='revolute'>
+      <pose relative_to='base_link'>-0.0075 -0.0505 0.0515 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rarm_link0</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-2.35</lower>
+          <upper>2.35</upper>
+          <effort>0.48</effort>
+          <velocity>6.55</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rarm_link0'>
+      <pose relative_to='rarm_joint0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000283 -0.014432 5.5e-05 0 -0 0</pose>
+        <mass>0.15</mass>
+        <inertia>
+          <ixx>0.00150693</ixx>
+          <ixy>5.13817e-07</ixy>
+          <ixz>-1.93767e-09</ixz>
+          <iyy>0.00150004</iyy>
+          <iyz>5.93518e-08</iyz>
+          <izz>0.00150696</izz>
+        </inertia>
+      </inertial>
+      <collision name='rarm_link0_collision'>
+        <pose>0.0075 0.0505 -0.0515 1.5708 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/rarm_link0.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='rarm_link0_fixed_joint_lump__rarm_module1_base_link_collision_1'>
+        <pose>0 -0.0135 0 3.14159 -0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverright_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='rarm_link0_visual'>
+        <pose>0.0075 0.0505 -0.0515 1.5708 0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_body_module/rarm_link0.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='rarm_link0_fixed_joint_lump__rarm_module1_base_link_visual_1'>
+        <pose>0 -0.0135 0 3.14159 -0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverright_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='rarm_module1_joint1' type='revolute'>
+      <pose relative_to='rarm_link0'>0 -0.0485 -0 1.5708 1.5708 0</pose>
+      <parent>rarm_link0</parent>
+      <child>rarm_module1_link1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1.57</lower>
+          <upper>0.087</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rarm_module1_link1'>
+      <pose relative_to='rarm_module1_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.000427 -0.017088 0.008009 0 -0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.005</ixx>
+          <ixy>6.12351e-09</ixy>
+          <ixz>-1.73012e-08</ixz>
+          <iyy>0.005</iyy>
+          <iyz>-1.40951e-07</iyz>
+          <izz>0.005</izz>
+        </inertia>
+      </inertial>
+      <collision name='rarm_module1_link1_collision'>
+        <pose>-0 -0 -0.035 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverright_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='rarm_module1_link1_visual'>
+        <pose>-0 -0 -0.035 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverright_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='rarm_module1_joint2' type='revolute'>
+      <pose relative_to='rarm_module1_link1'>0 0 0 0 -0 0</pose>
+      <parent>rarm_module1_link1</parent>
+      <child>rarm_module1_link2</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-2.35</lower>
+          <upper>2.35</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rarm_module1_link2'>
+      <pose relative_to='rarm_module1_joint2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.045263 -3.9e-05 -2e-06 0 -0 0</pose>
+        <mass>0.25</mass>
+        <inertia>
+          <ixx>8.97903e-06</ixx>
+          <ixy>1.01469e-07</ixy>
+          <ixz>-1.9886e-06</ixz>
+          <iyy>6.39612e-05</iyy>
+          <iyz>1.68261e-07</iyz>
+          <izz>6.30333e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='rarm_module1_link2_collision'>
+        <pose>-0 -0 -0.035 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverright_module_cover/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='rarm_module1_link2_fixed_joint_lump__rarm_module2_base_link_collision_1'>
+        <pose>0.031 0 0 3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='rarm_module1_link2_visual'>
+        <pose>-0 -0 -0.035 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_crosscantileverright_module_cover/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='rarm_module1_link2_fixed_joint_lump__rarm_module2_base_link_visual_1'>
+        <pose>0.031 0 0 3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='rarm_module2_joint1' type='revolute'>
+      <pose relative_to='rarm_module1_link2'>0.071 0 -0 0 1.5708 0</pose>
+      <parent>rarm_module1_link2</parent>
+      <child>rarm_module2_link1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1.78</lower>
+          <upper>1.78</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rarm_module2_link1'>
+      <pose relative_to='rarm_module2_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.013852 -4e-06 0.032342 0 -0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>1.18078e-05</ixx>
+          <ixy>-1.26954e-07</ixy>
+          <ixz>1.15708e-05</ixz>
+          <iyy>3.85128e-05</iyy>
+          <iyz>4.95963e-08</iyz>
+          <izz>3.42886e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='rarm_module2_link1_collision'>
+        <pose>-0 -0 -0.04 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='rarm_module2_link1_fixed_joint_lump__right_hand_base_link_collision_1'>
+        <pose>0 0 0.033 1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='rarm_module2_link1_visual'>
+        <pose>-0 -0 -0.04 -1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='rarm_module2_link1_fixed_joint_lump__right_hand_base_link_visual_1'>
+        <pose>0 0 0.033 1.5708 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/base_link.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='right_hand_joint1' type='revolute'>
+      <pose relative_to='rarm_module2_link1'>0.011737 -0 0.067803 0 0 -1.5708</pose>
+      <parent>rarm_module2_link1</parent>
+      <child>right_hand_link1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.43</lower>
+          <upper>1.57</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_hand_link1'>
+      <pose relative_to='right_hand_joint1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.000219 -0.028766 -0.028663 0 -0 0</pose>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>1.64549e-06</ixx>
+          <ixy>-2.15742e-13</ixy>
+          <ixz>5.20848e-13</ixz>
+          <iyy>4.13324e-07</iyy>
+          <iyz>-2.90081e-07</iyz>
+          <izz>1.5579e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_hand_link1_collision'>
+        <pose>0 -0.011737 -0.034803 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='right_hand_link1_visual'>
+        <pose>0 -0.011737 -0.034803 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='right_hand_joint2' type='revolute'>
+      <pose relative_to='rarm_module2_link1'>-0.011741 0 0.067803 0 0 -1.5708</pose>
+      <parent>rarm_module2_link1</parent>
+      <child>right_hand_link2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.43</lower>
+          <upper>1.57</upper>
+          <effort>0</effort>
+          <velocity>6.5</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_hand_link2'>
+      <pose relative_to='right_hand_joint2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000219 -0.005287 -0.040943 0 -0 0</pose>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>1.64549e-06</ixx>
+          <ixy>2.15742e-13</ixy>
+          <ixz>5.20848e-13</ixz>
+          <iyy>4.13324e-07</iyy>
+          <iyz>2.90081e-07</iyz>
+          <izz>1.5579e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_hand_link2_collision'>
+        <pose>0 0.011741 -0.034803 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='right_hand_link2_visual'>
+        <pose>0 0.011741 -0.034803 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jedy_description/meshes/screw_hand_module/link2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <static>0</static>
+    <plugin name='gz::sim::systems::JointStatePublisher' filename='libgz-sim-joint-state-publisher-system.so'>
+      <joint_name>rarm_joint0</joint_name>
+      <joint_name>larm_joint0</joint_name>
+      <joint_name>head_joint0</joint_name>
+      <joint_name>mechanum_joint1</joint_name>
+      <joint_name>mechanum_joint2</joint_name>
+      <joint_name>mechanum_joint3</joint_name>
+      <joint_name>mechanum_joint4</joint_name>
+    </plugin>
+  </model>
+</sdf>
