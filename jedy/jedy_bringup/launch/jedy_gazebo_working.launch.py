@@ -66,7 +66,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Bridge for joint states
+    # Bridge for joint states (Gazebo -> ROS2)
     bridge_joint_states = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -76,6 +76,29 @@ def generate_launch_description():
         remappings=[
             ('/model/jedy/joint_state', '/joint_states_gazebo')
         ],
+        output='screen'
+    )
+    
+    # Bridge for joint commands (ROS2 -> Gazebo)
+    bridge_joint_commands = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/model/jedy/joint/rarm_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+            '/model/jedy/joint/larm_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+            '/model/jedy/joint/head_joint0/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+            '/model/jedy/joint/mechanum_joint1/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+            '/model/jedy/joint/mechanum_joint2/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+            '/model/jedy/joint/mechanum_joint3/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+            '/model/jedy/joint/mechanum_joint4/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        ],
+        output='screen'
+    )
+
+    # Joint command relay - converts /joint_states to individual joint commands
+    joint_command_relay = Node(
+        package='jedy_bringup',
+        executable='joint_command_relay.py',
         output='screen'
     )
 
@@ -88,5 +111,7 @@ def generate_launch_description():
         spawn_entity,
         bridge_clock,
         bridge_joint_states,
+        bridge_joint_commands,
+        joint_command_relay,
         joint_state_publisher_gui,
     ])
