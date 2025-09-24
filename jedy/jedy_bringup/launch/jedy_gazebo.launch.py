@@ -4,7 +4,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command
@@ -12,6 +12,14 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    # Set Gazebo resource path
+    pkg_jedy_bringup = get_package_share_directory('jedy_bringup')
+    model_path = os.path.join(pkg_jedy_bringup, 'worlds')
+    if 'GZ_SIM_RESOURCE_PATH' in os.environ:
+        gz_resource_path = os.environ['GZ_SIM_RESOURCE_PATH'] + ':' + model_path
+    else:
+        gz_resource_path = model_path
+
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     gui = LaunchConfiguration('gui', default='true')
@@ -49,7 +57,7 @@ def generate_launch_description():
     control_node = Node(
         package='controller_manager',
         executable='ros2_control_node',
-        parameters=[robot_description, controllers_config],
+        parameters=[controllers_config],
         output='screen',
     )
 
@@ -88,6 +96,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
         DeclareLaunchArgument('gui', default_value='true'),
         DeclareLaunchArgument('headless', default_value='false'),
