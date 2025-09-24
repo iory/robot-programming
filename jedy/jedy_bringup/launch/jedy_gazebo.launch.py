@@ -26,7 +26,6 @@ def generate_launch_description():
     headless = LaunchConfiguration('headless', default='false')
     
     model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_no_arm.urdf'))
-    rviz_config = LaunchConfiguration('rviz_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy.rviz'))
     controllers_config = LaunchConfiguration('controllers_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_controllers.ros2.yaml'))
 
     # Gazebo
@@ -79,22 +78,6 @@ def generate_launch_description():
         arguments=['fullbody_controller', '--controller-manager', '/controller_manager'],
     )
 
-    rviz = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        arguments=['-d', rviz_config],
-        output='screen',
-        condition=IfCondition(gui)
-    )
-
-    depth_renamer = Node(
-        package='topic_tools',
-        executable='relay',
-        arguments=['/camera/depth/points', '/camera/depth_registered/points'],
-        output='screen'
-    )
-
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
@@ -102,7 +85,6 @@ def generate_launch_description():
         DeclareLaunchArgument('headless', default_value='false'),
         
         DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_no_arm.urdf')),
-        DeclareLaunchArgument('rviz_config', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy.rviz')),
         DeclareLaunchArgument('controllers_config', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_controllers.ros2.yaml')),
         gazebo,
         robot_state_publisher,
@@ -111,6 +93,4 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         diff_drive_controller_spawner,
         fullbody_controller_spawner,
-        rviz,
-        depth_renamer
     ])
