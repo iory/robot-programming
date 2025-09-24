@@ -38,4 +38,11 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+# Install Python executables
+install(
+  PROGRAMS
+    scripts/joint_command_relay.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()

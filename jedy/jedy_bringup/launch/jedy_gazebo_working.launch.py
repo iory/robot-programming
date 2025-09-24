@@ -3,7 +3,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
@@ -96,9 +96,9 @@ def generate_launch_description():
     )
 
     # Joint command relay - converts /joint_states to individual joint commands
-    joint_command_relay = Node(
-        package='jedy_bringup',
-        executable='joint_command_relay.py',
+    joint_relay_script = os.path.join(pkg_jedy_bringup, 'scripts', 'joint_command_relay.py')
+    joint_command_relay = ExecuteProcess(
+        cmd=['python3', joint_relay_script],
         output='screen'
     )
 
