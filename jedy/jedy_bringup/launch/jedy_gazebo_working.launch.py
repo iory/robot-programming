@@ -40,11 +40,12 @@ def generate_launch_description():
         parameters=[robot_description, {'use_sim_time': True}]
     )
 
-    # Spawn entity - positioned so wheels touch the ground
+    # Spawn entity using SDF file directly
+    sdf_file = os.path.join(pkg_jedy_description, 'urdf', 'jedy_four_dof.sdf')
     spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
-        arguments=['-topic', '/robot_description', 
+        arguments=['-file', sdf_file,
                    '-entity', 'jedy',
                    '-x', '0',
                    '-y', '0',
