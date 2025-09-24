@@ -69,7 +69,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_body_module/head_link0.dae"/>
       </geometry>
-      <material name="__unnamed_material_4"/>
       <origin xyz="0.00749999999999764 3.14057815610015e-16 -0.0690000000000014" rpy="1.5707963267949099 1.31905250966292e-44 1.5707963267949006"/>
     </visual>
     <collision>
@@ -92,7 +91,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -0.0 -1.5707963267949006"/>
     </visual>
     <collision>
@@ -112,7 +110,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="-1.71209796808181e-14 -1.42791371668497e-13 -0.0349999999999999" rpy="-1.5707963267954 -5.713721933430832e-12 -1.57079632679487"/>
     </visual>
     <collision>
@@ -132,7 +129,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_crosscantileverright_module_cover/link2.dae"/>
       </geometry>
-      <material name="__unnamed_material_3"/>
       <origin xyz="-1.71209796808181e-14 -1.42791371668497e-13 -0.0349999999999999" rpy="-1.5707963267954 -5.713721933430832e-12 -1.57079632679487"/>
     </visual>
     <collision>
@@ -153,7 +149,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -1.23259516440783e-32 -1.5707963267949006"/>
     </visual>
     <collision>
@@ -173,7 +168,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="-4.78706382828717e-18 -2.27356509549241e-13 -0.04" rpy="-1.5707963267949006 -5.684376829408401e-12 -1.5707963267949006"/>
     </visual>
     <collision>
@@ -194,7 +188,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_hand_module/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 5.29012147897801e-16 -2.35785414704303e-18"/>
     </visual>
     <collision>
@@ -214,7 +207,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_hand_module/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="7.01138565488769e-16 -0.0117372282582485 -0.0348029710109983" rpy="1.57079632679517 -1.02096043843821e-14 1.99259294485139e-16"/>
     </visual>
     <collision>
@@ -234,7 +226,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_hand_module/link2.dae"/>
       </geometry>
-      <material name="__unnamed_material_3"/>
       <origin xyz="5.31057674077393e-16 0.0117414855054993 -0.0348029710109982" rpy="1.57079632679517 -6.73902532357641e-15 -1.02413966552629e-15"/>
     </visual>
     <collision>
@@ -254,7 +245,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -0.0 -1.5707963267949006"/>
     </visual>
     <collision>
@@ -274,7 +264,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="1.57130087187741e-14 1.70916709453945e-13 -0.035000000000035" rpy="-1.57079632679494 6.500314164004082e-12 -1.57079632679487"/>
     </visual>
     <collision>
@@ -294,7 +283,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_crosscantileverleft_module_cover/link2.dae"/>
       </geometry>
-      <material name="__unnamed_material_3"/>
       <origin xyz="1.57130087187741e-14 -2.80350352117951e-14 -0.035000000000035" rpy="-1.57079632679494 8.159786021314742e-13 -1.57079632679487"/>
     </visual>
     <collision>
@@ -315,7 +303,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="-1.5707963267949006 -1.23259516440783e-32 -1.5707963267949006"/>
     </visual>
     <collision>
@@ -335,7 +322,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_26mmhinge_module_cover/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="-4.78706382828717e-18 -2.27356509549241e-13 -0.04" rpy="-1.5707963267949006 -5.684376829408401e-12 -1.5707963267949006"/>
     </visual>
     <collision>
@@ -356,7 +342,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_hand_module/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 5.29012147897801e-16 -2.35785414704303e-18"/>
     </visual>
     <collision>
@@ -376,7 +361,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_hand_module/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="7.01138565488769e-16 -0.0117372282582485 -0.0348029710109983" rpy="1.57079632679517 -1.02096043843821e-14 1.99259294485139e-16"/>
     </visual>
     <collision>
@@ -396,7 +380,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_hand_module/link2.dae"/>
       </geometry>
-      <material name="__unnamed_material_3"/>
       <origin xyz="5.31057674077393e-16 0.0117414855054993 -0.0348029710109982" rpy="1.57079632679517 -6.73902532357641e-15 -1.02413966552629e-15"/>
     </visual>
     <collision>
@@ -416,7 +399,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/base_link.dae"/>
       </geometry>
-      <material name="mechanum___unnamed_material_1"/>
       <origin xyz="3.62670863096242e-16 -0.0234999999999999 1.90166560887181e-18" rpy="-1.5707963267949006 6.67140997056125e-17 -1.57079632679486"/>
     </visual>
     <collision>
@@ -436,7 +418,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link1.dae"/>
       </geometry>
-      <material name="mechanum___unnamed_material_2"/>
       <origin xyz="-0.0539999999999978 -0.0657500000000021 -0.102" rpy="-1.57079632679486 -4.0188125235906916e-14 -1.57079632679492"/>
     </visual>
     <collision>
@@ -456,7 +437,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link2.dae"/>
       </geometry>
-      <material name="mechanum___unnamed_material_3"/>
       <origin xyz="-0.0539999999999662 0.0657499999999586 -0.102" rpy="-1.5707963267949006 -2.131628307790371e-15 -1.57079632679492"/>
     </visual>
     <collision>
@@ -476,7 +456,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link3.dae"/>
       </geometry>
-      <material name="__unnamed_material_4"/>
       <origin xyz="0.0539999999999998 -0.0657500000000001 -0.102" rpy="-1.5707963267949006 -2.9117222201804313e-15 -1.57079632679492"/>
     </visual>
     <collision>
@@ -496,7 +475,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link4.dae"/>
       </geometry>
-      <material name="__unnamed_material_5"/>
       <origin xyz="0.0539999999999999 0.0657499999999995 -0.102" rpy="-1.57079632679486 -3.973915661273562e-14 -1.57079632679492"/>
     </visual>
     <collision>
@@ -516,7 +494,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_20mmhead_module_cover/base_link.dae"/>
       </geometry>
-      <material name="__unnamed_material_1"/>
       <origin xyz="0.0 0.0 0.0" rpy="1.5707963267949006 2.0521908455613e-16 1.5707963267949006"/>
     </visual>
     <collision>
@@ -536,7 +513,6 @@
       <geometry>
         <mesh filename="package://jedy_description/meshes/screw_20mmhead_module_cover/link1.dae"/>
       </geometry>
-      <material name="__unnamed_material_2"/>
       <origin xyz="1.01673274679116e-16 6.96912263350572e-18 -0.0395" rpy="1.5707963267949006 -4.30378006960599e-16 1.5707963267949006"/>
     </visual>
     <collision>
@@ -793,88 +769,6 @@
     <axis xyz=" 0. -1.  0."/>
     <origin xyz="0.0 0.0 0.0395" rpy="0.0 -0.0 0.0"/>
   </joint>
-  <material name="__unnamed_material_1">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="__unnamed_material_2">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="__unnamed_material_3">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="__unnamed_material_4">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="rarm_module1___unnamed_material_1">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="rarm_module1___unnamed_material_2">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="rarm_module1___unnamed_material_3">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="rarm_module2___unnamed_material_1">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="rarm_module2___unnamed_material_2">
-    <color rgba="0.29803922 0.29803922 0.29803922 1.        "/>
-  </material>
-  <material name="right_hand___unnamed_material_1">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="right_hand___unnamed_material_2">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="right_hand___unnamed_material_3">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="larm_module1___unnamed_material_1">
-    <color rgba="0.29803922 0.29803922 0.29803922 1.        "/>
-  </material>
-  <material name="larm_module1___unnamed_material_2">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="larm_module1___unnamed_material_3">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="larm_module2___unnamed_material_1">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="larm_module2___unnamed_material_2">
-    <color rgba="0.29803922 0.29803922 0.29803922 1.        "/>
-  </material>
-  <material name="left_hand___unnamed_material_1">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="left_hand___unnamed_material_2">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="left_hand___unnamed_material_3">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="mechanum___unnamed_material_1">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="mechanum___unnamed_material_2">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="mechanum___unnamed_material_3">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="mechanum___unnamed_material_4">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="mechanum___unnamed_material_5">
-    <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
-  </material>
-  <material name="head_module1___unnamed_material_1">
-    <color rgba="0.18039 0.18039 0.18039 1.     "/>
-  </material>
-  <material name="head_module1___unnamed_material_2">
-    <color rgba="0.75294 0.75294 0.75294 1.     "/>
-  </material>
-  <material name="__unnamed_material_5"/>
 
   <!-- Gazebo plugins -->
   <gazebo>
