@@ -424,7 +424,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder radius="0.03" length="0.02"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/base_link.dae"/>
       </geometry>
       <origin xyz="3.62670863096242e-16 -0.0234999999999999 1.90166560887181e-18" rpy="-1.5707963267949006 6.67140997056125e-17 -1.57079632679486"/>
     </collision>
