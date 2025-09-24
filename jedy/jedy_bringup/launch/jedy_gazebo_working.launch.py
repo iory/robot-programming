@@ -106,6 +106,7 @@ def generate_launch_description():
     return LaunchDescription([
         SetEnvironmentVariable(name='LIBGL_ALWAYS_SOFTWARE', value='1'),
         SetEnvironmentVariable(name='OGRE_RTT_MODE', value='Copy'),
+        SetEnvironmentVariable(name='GAZEBO_RESOURCE_PATH', value=os.path.join(pkg_jedy_description, 'meshes')),
         
         gazebo,
         robot_state_publisher,
