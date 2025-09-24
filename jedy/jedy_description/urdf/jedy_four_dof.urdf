@@ -444,7 +444,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder radius="0.03" length="0.02"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link1.dae"/>
       </geometry>
       <origin xyz="-0.0539999999999978 -0.0657500000000021 -0.102" rpy="-1.57079632679486 -4.0188125235906916e-14 -1.57079632679492"/>
     </collision>
@@ -464,7 +464,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder radius="0.03" length="0.02"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link2.dae"/>
       </geometry>
       <origin xyz="-0.0539999999999662 0.0657499999999586 -0.102" rpy="-1.5707963267949006 -2.131628307790371e-15 -1.57079632679492"/>
     </collision>
@@ -484,7 +484,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder radius="0.03" length="0.02"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link3.dae"/>
       </geometry>
       <origin xyz="0.0539999999999998 -0.0657500000000001 -0.102" rpy="-1.5707963267949006 -2.9117222201804313e-15 -1.57079632679492"/>
     </collision>
@@ -504,7 +504,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder radius="0.03" length="0.02"/>
+        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link4.dae"/>
       </geometry>
       <origin xyz="0.0539999999999999 0.0657499999999995 -0.102" rpy="-1.57079632679486 -3.973915661273562e-14 -1.57079632679492"/>
     </collision>
