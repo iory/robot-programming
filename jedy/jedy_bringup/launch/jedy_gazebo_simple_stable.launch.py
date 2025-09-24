@@ -3,7 +3,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
@@ -15,14 +15,11 @@ def generate_launch_description():
     # Gazebo-compatible URDF file
     urdf_file = os.path.join(pkg_jedy_bringup, 'urdf', 'jedy_gazebo_compatible.urdf')
 
-    # Gazebo with default world (with ground plane)
+    # Gazebo - just use default empty world
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
-        launch_arguments={
-            'verbose': 'true',
-            'gz_args': 'empty.sdf'
-        }.items(),
+        launch_arguments={'verbose': 'true'}.items(),
     )
 
     # Robot description
@@ -39,7 +36,26 @@ def generate_launch_description():
         parameters=[robot_description, {'use_sim_time': True}]
     )
 
-    # Spawn entity - positioned so wheels touch the ground
+    # Add ground plane manually
+    add_ground = ExecuteProcess(
+        cmd=[
+            'ign', 'service', '-s', '/world/default/create',
+            '--reqtype', 'gz.msgs.EntityFactory',
+            '--reptype', 'gz.msgs.Boolean',
+            '--timeout', '5000',
+            '--req', 'sdf: "' + 
+            '<sdf version=\\"1.6\\"><model name=\\"ground\\"><static>true</static>' +
+            '<link name=\\"ground_link\\"><collision name=\\"ground_collision\\">' +
+            '<geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>' +
+            '</collision><visual name=\\"ground_visual\\">' +
+            '<geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>' +
+            '<material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.8 0.8 0.8 1</diffuse></material>' +
+            '</visual></link></model></sdf>", name: "ground"'
+        ],
+        output='screen'
+    )
+
+    # Spawn robot entity - higher position
     spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
@@ -47,7 +63,7 @@ def generate_launch_description():
                    '-entity', 'jedy',
                    '-x', '0',
                    '-y', '0',
-                   '-z', '0.15'],  # Adjusted height so wheels touch ground
+                   '-z', '0.20'],  # Higher position to ensure clearance
         output='screen'
     )
 
@@ -66,27 +82,14 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Bridge for joint states
-    bridge_joint_states = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        arguments=[
-            '/model/jedy/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
-        ],
-        remappings=[
-            ('/model/jedy/joint_state', '/joint_states_gazebo')
-        ],
-        output='screen'
-    )
-
     return LaunchDescription([
         SetEnvironmentVariable(name='LIBGL_ALWAYS_SOFTWARE', value='1'),
         SetEnvironmentVariable(name='OGRE_RTT_MODE', value='Copy'),
         
         gazebo,
         robot_state_publisher,
+        add_ground,  # Add ground first
         spawn_entity,
         bridge_clock,
-        bridge_joint_states,
         joint_state_publisher_gui,
     ])
