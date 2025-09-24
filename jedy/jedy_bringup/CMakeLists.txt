@@ -19,6 +19,11 @@ install(
 )
 
 install(
+  DIRECTORY urdf
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
   DIRECTORY euslisp
   DESTINATION share/${PROJECT_NAME}
 )
