@@ -14,7 +14,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # Set Gazebo resource path
     pkg_jedy_bringup = get_package_share_directory('jedy_bringup')
-    model_path = os.path.join(pkg_jedy_bringup, 'worlds')
+    model_path = os.path.join(pkg_jedy_bringup, 'worlds', 'model')
     if 'GZ_SIM_RESOURCE_PATH' in os.environ:
         gz_resource_path = os.environ['GZ_SIM_RESOURCE_PATH'] + ':' + model_path
     else:
