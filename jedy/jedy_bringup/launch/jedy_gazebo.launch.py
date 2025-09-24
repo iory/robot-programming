@@ -33,11 +33,14 @@ def generate_launch_description():
     model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_description'), 'urdf', 'jedy_four_dof.urdf'))
     controllers_config = LaunchConfiguration('controllers_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml'))
 
-    # Gazebo
+    # Gazebo with physics engine settings
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
-        launch_arguments={'on_exit_shutdown': 'true'}.items(),
+        launch_arguments={
+            'on_exit_shutdown': 'true',
+            'gz_args': '--physics-engine ignition::gazebo::systems::Physics --render-engine ogre2'
+        }.items(),
     )
 
     # Robot description
