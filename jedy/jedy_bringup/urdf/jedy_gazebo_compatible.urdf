@@ -210,13 +210,13 @@
     <origin xyz="0 0 0.15" rpy="0 0 0"/>
   </joint>
   
-  <!-- Mechanum wheel joints -->
+  <!-- Mechanum wheel joints - properly positioned to touch ground -->
   <joint name="mechanum_joint1" type="continuous">
     <limit effort="0.48" velocity="6.55"/>
     <parent link="base_link"/>
     <child link="mechanum_link1"/>
     <axis xyz="0 1 0"/>
-    <origin xyz="0.08 0.08 -0.05" rpy="0 0 0"/>
+    <origin xyz="0.08 0.08 -0.10" rpy="0 0 0"/>
   </joint>
   
   <joint name="mechanum_joint2" type="continuous">
@@ -224,7 +224,7 @@
     <parent link="base_link"/>
     <child link="mechanum_link2"/>
     <axis xyz="0 1 0"/>
-    <origin xyz="0.08 -0.08 -0.05" rpy="0 0 0"/>
+    <origin xyz="0.08 -0.08 -0.10" rpy="0 0 0"/>
   </joint>
   
   <joint name="mechanum_joint3" type="continuous">
@@ -232,7 +232,7 @@
     <parent link="base_link"/>
     <child link="mechanum_link3"/>
     <axis xyz="0 1 0"/>
-    <origin xyz="-0.08 0.08 -0.05" rpy="0 0 0"/>
+    <origin xyz="-0.08 0.08 -0.10" rpy="0 0 0"/>
   </joint>
   
   <joint name="mechanum_joint4" type="continuous">
@@ -240,6 +240,6 @@
     <parent link="base_link"/>
     <child link="mechanum_link4"/>
     <axis xyz="0 1 0"/>
-    <origin xyz="-0.08 -0.08 -0.05" rpy="0 0 0"/>
+    <origin xyz="-0.08 -0.08 -0.10" rpy="0 0 0"/>
   </joint>
 </robot>

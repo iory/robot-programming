@@ -15,11 +15,15 @@ def generate_launch_description():
     # Gazebo-compatible URDF file
     urdf_file = os.path.join(pkg_jedy_bringup, 'urdf', 'jedy_gazebo_compatible.urdf')
 
-    # Gazebo
+    # Gazebo with world file
+    world_file = os.path.join(pkg_jedy_bringup, 'worlds', 'jedy_world.sdf')
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
-        launch_arguments={'verbose': 'true'}.items(),
+        launch_arguments={
+            'verbose': 'true',
+            'gz_args': f'{world_file}'
+        }.items(),
     )
 
     # Robot description
@@ -36,7 +40,7 @@ def generate_launch_description():
         parameters=[robot_description, {'use_sim_time': True}]
     )
 
-    # Spawn entity
+    # Spawn entity - positioned so wheels touch the ground
     spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
@@ -44,7 +48,7 @@ def generate_launch_description():
                    '-entity', 'jedy',
                    '-x', '0',
                    '-y', '0',
-                   '-z', '0.2'],
+                   '-z', '0.15'],  # Adjusted height so wheels touch ground
         output='screen'
     )
 
