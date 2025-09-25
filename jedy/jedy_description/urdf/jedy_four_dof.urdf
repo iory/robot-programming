@@ -422,9 +422,9 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link1.dae"/>
+        <cylinder radius="0.025114329531788826" length="0.03370000049471855"/>
       </geometry>
-      <origin xyz="-0.0539999999999978 -0.0657500000000021 -0.102" rpy="-1.57079632679486 -4.0188125235906916e-14 -1.57079632679492"/>
+      <origin xyz="6.88716769184361e-07 -0.001600000008939964 -0.00010736849904119383" rpy="1.5707963267948561 -2.3370194668359545e-14 -2.3370194668358602e-14"/>
     </collision>
   </link>
   <link name="mechanum_link2">
@@ -441,9 +441,9 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link2.dae"/>
+        <cylinder radius="0.025114329531788826" length="0.03370000049471855"/>
       </geometry>
-      <origin xyz="-0.0539999999999662 0.0657499999999586 -0.102" rpy="-1.5707963267949006 -2.131628307790371e-15 -1.57079632679492"/>
+      <origin xyz="6.887168019290013e-07 0.0016000000088982613 -0.00010744673013694805" rpy="1.5707963267948943 -2.3370194668359542e-14 -2.3370194668359488e-14"/>
     </collision>
   </link>
   <link name="mechanum_link3">
@@ -460,9 +460,9 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link3.dae"/>
+        <cylinder radius="0.025114329531788826" length="0.03370000049471855"/>
       </geometry>
-      <origin xyz="0.0539999999999998 -0.0657500000000001 -0.102" rpy="-1.5707963267949006 -2.9117222201804313e-15 -1.57079632679492"/>
+      <origin xyz="-6.887167675120875e-07 -0.0016000000089392424 -0.00010744673013682315" rpy="1.5707963267948937 -2.3370194668359545e-14 -2.3370194668359476e-14"/>
     </collision>
   </link>
   <link name="mechanum_link4">
@@ -479,9 +479,9 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://jedy_description/meshes/screw_mechanum_module/link4.dae"/>
+        <cylinder radius="0.025114329531788826" length="0.03370000049471855"/>
       </geometry>
-      <origin xyz="0.0539999999999999 0.0657499999999995 -0.102" rpy="-1.57079632679486 -3.973915661273562e-14 -1.57079632679492"/>
+      <origin xyz="-6.88716774548126e-07 0.0016000000089455152 -0.0001073684990400281" rpy="1.5707963267948568 -2.3370194668359545e-14 -2.3370194668358617e-14"/>
     </collision>
   </link>
   <link name="head_module1_base_link">
