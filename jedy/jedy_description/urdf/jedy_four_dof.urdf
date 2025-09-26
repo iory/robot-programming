@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<robot name="test_robot">
+<robot name="jedy">
   <link name="base_link">
     <inertial>
       <origin xyz="-0.0160184841045738 0.00430877871309773 0.0345237811658367" rpy="0.0 -0.0 0.0"/>
