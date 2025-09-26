@@ -733,6 +733,12 @@
     <child link="mechanum_link1"/>
     <axis xyz=" 0. -1.  0."/>
     <origin xyz="0.0539999999999974 0.0422500000000013 0.102000000000001" rpy="0.0 -0.0 0.0"/>
+    <gazebo>
+      <isaac_sim>
+        <wheel_radius>0.025114</wheel_radius>
+        <mecanum_angle>45</mecanum_angle>
+      </isaac_sim>
+    </gazebo>
   </joint>
   <joint name="mechanum_joint2" type="continuous">
     <limit effort="0.48" velocity="6.55"/>
@@ -740,6 +746,12 @@
     <child link="mechanum_link2"/>
     <axis xyz=" 0. -1.  0."/>
     <origin xyz="0.0539999999999701 -0.0892499999999558 0.102" rpy="0.0 -0.0 0.0"/>
+    <gazebo>
+      <isaac_sim>
+        <wheel_radius>0.025114</wheel_radius>
+        <mecanum_angle>45</mecanum_angle>
+      </isaac_sim>
+    </gazebo>
   </joint>
   <joint name="mechanum_joint3" type="continuous">
     <limit effort="0.48" velocity="6.55"/>
@@ -747,6 +759,12 @@
     <child link="mechanum_link3"/>
     <axis xyz=" 0. -1.  0."/>
     <origin xyz="-0.0540000000000032 0.0422499999999969 0.102" rpy="0.0 -0.0 0.0"/>
+    <gazebo>
+      <isaac_sim>
+        <wheel_radius>0.025114</wheel_radius>
+        <mecanum_angle>45</mecanum_angle>
+      </isaac_sim>
+    </gazebo>
   </joint>
   <joint name="mechanum_joint4" type="continuous">
     <limit effort="0.48" velocity="6.55"/>
@@ -754,6 +772,12 @@
     <child link="mechanum_link4"/>
     <axis xyz="0. 1. 0."/>
     <origin xyz="-0.0539999999999922 -0.0892500000000068 0.101999999999999" rpy="0.0 -0.0 0.0"/>
+    <gazebo>
+      <isaac_sim>
+        <wheel_radius>0.025114</wheel_radius>
+        <mecanum_angle>45</mecanum_angle>
+      </isaac_sim>
+    </gazebo>
   </joint>
   <joint name="head_module1_base_link_to_dummy_link_head_joint" type="fixed">
     <limit effort="0.0" velocity="0.0"/>
