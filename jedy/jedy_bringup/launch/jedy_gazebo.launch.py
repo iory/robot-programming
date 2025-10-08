@@ -3,8 +3,9 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, RegisterEventHandler, TimerAction
 from launch.conditions import IfCondition
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
@@ -30,16 +31,16 @@ def generate_launch_description():
     gui = LaunchConfiguration('gui', default='true')
     headless = LaunchConfiguration('headless', default='false')
     
-    model_file = LaunchConfiguration('model', default=os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_four_dof_package.urdf'))
-    controllers_config = LaunchConfiguration('controllers_config', default=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml'))
+    model_file = os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_gazebo_compatible.xacro')
+    controllers_config = os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml')
 
     # Gazebo with safer settings
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
         launch_arguments={
+            'gz_args': '-r empty.sdf',
             'on_exit_shutdown': 'true',
-            'verbose': 'true'
         }.items(),
     )
 
@@ -61,37 +62,44 @@ def generate_launch_description():
         output='screen'
     )
 
-    control_node = Node(
-        package='controller_manager',
-        executable='ros2_control_node',
-        parameters=[controllers_config],
-        output='screen',
-    )
-
+    # Wait for Gazebo to be ready before spawning controllers
     joint_state_broadcaster_spawner = Node(
         package='controller_manager',
         executable='spawner',
         arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
+        output='screen',
     )
 
     mecanum_drive_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
         arguments=['mecanum_drive_controller', '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
+    # Delay controller spawners to ensure gz_ros2_control is ready
+    delayed_joint_state_broadcaster = TimerAction(
+        period=3.0,
+        actions=[joint_state_broadcaster_spawner]
+    )
+
+    delayed_mecanum_controller = TimerAction(
+        period=5.0,
+        actions=[mecanum_drive_controller_spawner]
     )
 
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
+        SetEnvironmentVariable(name='DISPLAY', value=':1'),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
         DeclareLaunchArgument('gui', default_value='true'),
         DeclareLaunchArgument('headless', default_value='false'),
-        
-        DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_four_dof_package.urdf')),
+
+        DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_gazebo_compatible.xacro')),
         DeclareLaunchArgument('controllers_config', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml')),
         gazebo,
         robot_state_publisher,
         spawn_entity,
-        control_node,
-        joint_state_broadcaster_spawner,
-        mecanum_drive_controller_spawner,
+        delayed_joint_state_broadcaster,
+        delayed_mecanum_controller,
     ])
