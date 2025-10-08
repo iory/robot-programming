@@ -28,12 +28,13 @@ def generate_launch_description():
 
     model_file = os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_gz.xacro')
 
-    # Gazebo with safer settings
+    # Gazebo with sensors enabled
+    world_file = os.path.join(pkg_jedy_bringup, 'worlds', 'world_with_sensors.sdf')
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
         launch_arguments={
-            'gz_args': '-r empty.sdf',
+            'gz_args': ['-r ', world_file],
             'on_exit_shutdown': 'true',
         }.items(),
     )
@@ -115,28 +116,67 @@ def generate_launch_description():
 
     # Delay controller spawners to ensure gz_ros2_control is ready
     delayed_joint_state_broadcaster = TimerAction(
-        period=3.0,
+        period=5.0,
         actions=[joint_state_broadcaster_spawner]
     )
 
     delayed_mecanum_controller = TimerAction(
-        period=5.0,
+        period=7.0,
         actions=[mecanum_drive_controller_spawner]
     )
 
     delayed_head_controller = TimerAction(
-        period=7.0,
+        period=9.0,
         actions=[head_controller_spawner]
     )
 
     delayed_rarm_controller = TimerAction(
-        period=9.0,
+        period=11.0,
         actions=[rarm_controller_spawner]
     )
 
     delayed_larm_controller = TimerAction(
-        period=11.0,
+        period=13.0,
         actions=[larm_controller_spawner]
+    )
+
+    # Clock bridge - essential for use_sim_time nodes
+    clock_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+
+    # Camera bridge - bridges Gazebo camera topics to ROS2 (RGB and depth only)
+    camera_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/camera/image@sensor_msgs/msg/Image@gz.msgs.Image',
+            '/camera/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo',
+            '/camera/depth_image@sensor_msgs/msg/Image@gz.msgs.Image',
+        ],
+        output='screen',
+        remappings=[
+            ('/camera/image', '/camera/rgb/image_raw'),
+            ('/camera/camera_info', '/camera/rgb/camera_info'),
+            ('/camera/depth_image', '/camera/depth/image_raw'),
+        ]
+    )
+
+    # Point cloud generation from RGB + Depth (like ROS1 openni2.launch)
+    point_cloud_xyzrgb = Node(
+        package='depth_image_proc',
+        executable='point_cloud_xyzrgb_node',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}],
+        remappings=[
+            ('rgb/image_rect_color', '/camera/rgb/image_raw'),
+            ('rgb/camera_info', '/camera/rgb/camera_info'),
+            ('depth_registered/image_rect', '/camera/depth/image_raw'),
+            ('points', '/camera/depth/points'),
+        ]
     )
 
     return LaunchDescription([
@@ -144,8 +184,11 @@ def generate_launch_description():
         SetEnvironmentVariable(name='DISPLAY', value=':1'),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
         gazebo,
+        clock_bridge,
         robot_state_publisher,
         spawn_entity,
+        camera_bridge,
+        point_cloud_xyzrgb,
         delayed_joint_state_broadcaster,
         delayed_mecanum_controller,
         delayed_head_controller,
