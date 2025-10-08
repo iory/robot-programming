@@ -285,6 +285,34 @@
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
+
+    <!-- Arm and head joints -->
+    <joint name="rarm_joint0">
+      <command_interface name="position">
+        <param name="min">-2.35</param>
+        <param name="max">2.35</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="larm_joint0">
+      <command_interface name="position">
+        <param name="min">-2.35</param>
+        <param name="max">2.35</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="head_joint0">
+      <command_interface name="position">
+        <param name="min">-2.35</param>
+        <param name="max">2.35</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
   </ros2_control>
 
   <!-- Gazebo plugins -->
