@@ -1,6 +1,3 @@
-
-# ROS2 Controller Configuration for Jedy
-
 controller_manager:
   ros__parameters:
     update_rate: 100  # Hz
@@ -8,34 +5,159 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    diff_drive_controller:
-      type: "diff_drive_controller/DiffDriveController"
-      left_wheel_names: ['front_left_wheel_joint', 'rear_left_wheel_joint']
-      right_wheel_names: ['front_right_wheel_joint', 'rear_right_wheel_joint']
-      publish_rate: 20
-      pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.1]
-      twist_covariance_diagonal: [0.001, 0.001, 0.001, 1000000.0, 1000000.0, 0.1]
-      cmd_vel_timeout: 0.25
-      enable_odom_tf: true
-      base_frame_id: base_link
-      wheel_separation_multiplier: 1.0
-      wheel_radius_multiplier: 1.0
-      linear.x.has_velocity_limits: true
-      linear.x.max_velocity: 0.1
-      linear.x.has_acceleration_limits: true
-      linear.x.max_acceleration: 0.1
-      angular.z.has_velocity_limits: true
-      angular.z.max_velocity: 1.0
-      angular.z.has_acceleration_limits: true
-      angular.z.max_acceleration: 1.0
+    mecanum_drive_controller:
+      type: "mecanum_drive_controller/MecanumDriveController"
 
-    fullbody_controller:
+    head_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-      joints:
-        - head_joint0
-        - head_joint1
-      command_interfaces:
-        - position
-      state_interfaces:
-        - position
-        - velocity
+
+    rarm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    larm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+mecanum_drive_controller:
+  ros__parameters:
+    front_left_wheel_command_joint_name: "front_left_wheel_joint"
+    front_right_wheel_command_joint_name: "front_right_wheel_joint"
+    rear_left_wheel_command_joint_name: "rear_left_wheel_joint"
+    rear_right_wheel_command_joint_name: "rear_right_wheel_joint"
+    kinematics:
+      base_frame_offset:
+        x: 0.0
+        y: 0.0
+        theta: 0.0
+      wheels_radius: 0.05
+      sum_of_robot_center_projection_on_X_Y_axis: 0.16
+    base_frame_id: base_link
+    odom_frame_id: odom
+    enable_odom_tf: true
+    pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 1000000.0, 1000000.0, 0.03]
+    linear:
+      x:
+        has_velocity_limits: true
+        max_velocity: 0.1
+        has_acceleration_limits: true
+        max_acceleration: 20.0
+      y:
+        has_velocity_limits: true
+        max_velocity: 0.1
+        has_acceleration_limits: true
+        max_acceleration: 20.0
+    angular:
+      z:
+        has_velocity_limits: true
+        max_velocity: 4.0
+        has_acceleration_limits: true
+        max_acceleration: 25.0
+
+head_controller:
+  ros__parameters:
+    joints:
+      - head_joint0
+      - head_joint1
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 2.0
+      head_joint0:
+        trajectory: 0.5
+        goal: 0.1
+      head_joint1:
+        trajectory: 0.5
+        goal: 0.1
+
+rarm_controller:
+  ros__parameters:
+    joints:
+      - rarm_joint0
+      - rarm_joint1
+      - rarm_joint2
+      - rarm_joint3
+      - rarm_joint4
+      - rarm_joint5
+      - rarm_joint6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 2.0
+      rarm_joint0:
+        trajectory: 0.5
+        goal: 0.1
+      rarm_joint1:
+        trajectory: 0.5
+        goal: 0.1
+      rarm_joint2:
+        trajectory: 0.5
+        goal: 0.1
+      rarm_joint3:
+        trajectory: 0.5
+        goal: 0.1
+      rarm_joint4:
+        trajectory: 0.5
+        goal: 0.1
+      rarm_joint5:
+        trajectory: 0.5
+        goal: 0.1
+      rarm_joint6:
+        trajectory: 0.5
+        goal: 0.1
+
+larm_controller:
+  ros__parameters:
+    joints:
+      - larm_joint0
+      - larm_joint1
+      - larm_joint2
+      - larm_joint3
+      - larm_joint4
+      - larm_joint5
+      - larm_joint6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 2.0
+      larm_joint0:
+        trajectory: 0.5
+        goal: 0.1
+      larm_joint1:
+        trajectory: 0.5
+        goal: 0.1
+      larm_joint2:
+        trajectory: 0.5
+        goal: 0.1
+      larm_joint3:
+        trajectory: 0.5
+        goal: 0.1
+      larm_joint4:
+        trajectory: 0.5
+        goal: 0.1
+      larm_joint5:
+        trajectory: 0.5
+        goal: 0.1
+      larm_joint6:
+        trajectory: 0.5
+        goal: 0.1

@@ -3,9 +3,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, RegisterEventHandler, TimerAction
-from launch.conditions import IfCondition
-from launch.event_handlers import OnProcessExit
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
@@ -18,7 +16,6 @@ def generate_launch_description():
     model_path = os.path.join(pkg_jedy_bringup, 'worlds', 'model')
 
     # ':' で区切られた複数のパスを設定
-    # os.path.dirname(pkg_jedy_description) を追加して、'jedy_description'モデルを見つけられるようにする
     resource_paths = [model_path, os.path.dirname(pkg_jedy_description)]
 
     if 'GZ_SIM_RESOURCE_PATH' in os.environ:
@@ -28,11 +25,8 @@ def generate_launch_description():
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    gui = LaunchConfiguration('gui', default='true')
-    headless = LaunchConfiguration('headless', default='false')
-    
-    model_file = os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_gazebo_compatible.xacro')
-    controllers_config = os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml')
+
+    model_file = os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_gz.xacro')
 
     # Gazebo with safer settings
     gazebo = IncludeLaunchDescription(
@@ -44,8 +38,29 @@ def generate_launch_description():
         }.items(),
     )
 
-    # Robot description
-    robot_description = {'robot_description': Command(['xacro ', model_file])}
+    # Robot description with initial joint positions
+    # You can override these values by passing arguments to the launch file
+    robot_description = {'robot_description': Command([
+        'xacro ', model_file,
+        ' head_j0_init:=0.0',
+        ' head_j1_init:=0.0',
+        ' rarm_j0_init:=1.5708',
+        ' rarm_j1_init:=-0.0698',
+        ' rarm_j2_init:=-0.5236',
+        ' rarm_j3_init:=-1.7453',
+        ' rarm_j4_init:=-0.0524',
+        ' rarm_j5_init:=-1.5359',
+        ' rarm_j6_init:=-0.0175',
+        ' rarm_gripper_init:=0.0',
+        ' larm_j0_init:=-1.5708',
+        ' larm_j1_init:=0.0698',
+        ' larm_j2_init:=0.5236',
+        ' larm_j3_init:=-1.7453',
+        ' larm_j4_init:=-1.5359',
+        ' larm_j5_init:=-0.1047',
+        ' larm_j6_init:=1.5533',
+        ' larm_gripper_init:=0.0',
+    ])}
 
     # Nodes
     robot_state_publisher = Node(
@@ -58,7 +73,7 @@ def generate_launch_description():
     spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
-        arguments=['-topic', '/robot_description', '-entity', 'jedy'],
+        arguments=['-topic', '/robot_description', '-entity', 'jedy', '-z', '0.2'],
         output='screen'
     )
 
@@ -77,6 +92,27 @@ def generate_launch_description():
         output='screen',
     )
 
+    head_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['head_controller', '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
+    rarm_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['rarm_controller', '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
+    larm_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['larm_controller', '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
     # Delay controller spawners to ensure gz_ros2_control is ready
     delayed_joint_state_broadcaster = TimerAction(
         period=3.0,
@@ -88,18 +124,31 @@ def generate_launch_description():
         actions=[mecanum_drive_controller_spawner]
     )
 
+    delayed_head_controller = TimerAction(
+        period=7.0,
+        actions=[head_controller_spawner]
+    )
+
+    delayed_rarm_controller = TimerAction(
+        period=9.0,
+        actions=[rarm_controller_spawner]
+    )
+
+    delayed_larm_controller = TimerAction(
+        period=11.0,
+        actions=[larm_controller_spawner]
+    )
+
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
         SetEnvironmentVariable(name='DISPLAY', value=':1'),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
-        DeclareLaunchArgument('gui', default_value='true'),
-        DeclareLaunchArgument('headless', default_value='false'),
-
-        DeclareLaunchArgument('model', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_gazebo_compatible.xacro')),
-        DeclareLaunchArgument('controllers_config', default_value=os.path.join(get_package_share_directory('jedy_bringup'), 'config', 'jedy_mecanum_controllers.ros2.yaml')),
         gazebo,
         robot_state_publisher,
         spawn_entity,
         delayed_joint_state_broadcaster,
         delayed_mecanum_controller,
+        delayed_head_controller,
+        delayed_rarm_controller,
+        delayed_larm_controller,
     ])
