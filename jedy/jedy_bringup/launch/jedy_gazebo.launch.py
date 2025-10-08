@@ -179,6 +179,15 @@ def generate_launch_description():
         ]
     )
 
+    # Static transform to connect Gazebo's camera frame to optical frame
+    # RGB and depth images should be published in camera_*_optical_frame
+    camera_tf_publisher = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=['0', '0', '0', '0', '0', '0', 'camera_depth_optical_frame', 'jedy/head_link1/camera'],
+        output='screen'
+    )
+
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
         SetEnvironmentVariable(name='DISPLAY', value=':1'),
@@ -188,6 +197,7 @@ def generate_launch_description():
         robot_state_publisher,
         spawn_entity,
         camera_bridge,
+        camera_tf_publisher,
         point_cloud_xyzrgb,
         delayed_joint_state_broadcaster,
         delayed_mecanum_controller,
