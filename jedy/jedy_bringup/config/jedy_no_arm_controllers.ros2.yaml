@@ -8,6 +8,9 @@ controller_manager:
     mecanum_drive_controller:
       type: "mecanum_drive_controller/MecanumDriveController"
 
+    head_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
 mecanum_drive_controller:
   ros__parameters:
     front_left_wheel_command_joint_name: "front_left_wheel_joint"
@@ -43,3 +46,26 @@ mecanum_drive_controller:
         max_velocity: 4.0
         has_acceleration_limits: true
         max_acceleration: 25.0
+
+head_controller:
+  ros__parameters:
+    joints:
+      - head_joint0
+      - head_joint1
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 2.0
+      head_joint0:
+        trajectory: 0.5
+        goal: 0.1
+      head_joint1:
+        trajectory: 0.5
+        goal: 0.1

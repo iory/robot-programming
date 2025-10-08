@@ -71,6 +71,13 @@ def generate_launch_description():
         output='screen',
     )
 
+    head_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['head_controller', '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
     # Delay controller spawners to ensure gz_ros2_control is ready
     delayed_joint_state_broadcaster = TimerAction(
         period=3.0,
@@ -82,6 +89,11 @@ def generate_launch_description():
         actions=[mecanum_drive_controller_spawner]
     )
 
+    delayed_head_controller = TimerAction(
+        period=7.0,
+        actions=[head_controller_spawner]
+    )
+
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
         SetEnvironmentVariable(name='DISPLAY', value=':1'),
@@ -91,4 +103,5 @@ def generate_launch_description():
         spawn_entity,
         delayed_joint_state_broadcaster,
         delayed_mecanum_controller,
+        delayed_head_controller,
     ])
