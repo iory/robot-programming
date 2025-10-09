@@ -43,6 +43,7 @@ install(
   PROGRAMS
     scripts/joint_command_relay.py
     scripts/head_trajectory_sample.py
+    scripts/twist_stamper.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

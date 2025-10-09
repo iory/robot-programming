@@ -188,6 +188,21 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Twist to TwistStamped converter for cmd_vel (for teleop and nav2 compatibility)
+    cmd_vel_relay = Node(
+        package='jedy_bringup',
+        executable='twist_stamper.py',
+        output='screen',
+        parameters=[
+            {'use_sim_time': use_sim_time},
+            {'frame_id': 'base_link'}
+        ],
+        remappings=[
+            ('cmd_vel_in', '/cmd_vel'),
+            ('cmd_vel_out', '/mecanum_drive_controller/reference'),
+        ]
+    )
+
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
         SetEnvironmentVariable(name='DISPLAY', value=':1'),
@@ -199,6 +214,7 @@ def generate_launch_description():
         camera_bridge,
         camera_tf_publisher,
         point_cloud_xyzrgb,
+        cmd_vel_relay,
         delayed_joint_state_broadcaster,
         delayed_mecanum_controller,
         delayed_head_controller,
