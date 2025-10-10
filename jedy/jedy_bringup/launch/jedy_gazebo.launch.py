@@ -29,7 +29,7 @@ def generate_launch_description():
     model_file = os.path.join(get_package_share_directory('jedy_bringup'), 'urdf', 'jedy_gz.xacro')
 
     # Gazebo with sensors enabled
-    world_file = os.path.join(pkg_jedy_bringup, 'worlds', 'world_with_sensors.sdf')
+    world_file = os.path.join(pkg_jedy_bringup, 'worlds', 'empty.world')
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
@@ -203,6 +203,14 @@ def generate_launch_description():
         ]
     )
 
+    # LiDAR bridge - bridges Gazebo LiDAR to ROS2
+    lidar_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'],
+        output='screen'
+    )
+
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
         SetEnvironmentVariable(name='DISPLAY', value=':1'),
@@ -215,6 +223,7 @@ def generate_launch_description():
         camera_tf_publisher,
         point_cloud_xyzrgb,
         cmd_vel_relay,
+        lidar_bridge,
         delayed_joint_state_broadcaster,
         delayed_mecanum_controller,
         delayed_head_controller,

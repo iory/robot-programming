@@ -66,5 +66,30 @@
         </visual>
       </link>
     </model>
+
+    <!-- Field model from OBJ file - Commented out for performance -->
+    <!--
+    <model name="field">
+      <static>true</static>
+      <pose>0 0 0 1.5708 0 0</pose>
+      <link name="field_link">
+        <collision name="field_collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>10 10</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="field_visual">
+          <geometry>
+            <mesh>
+              <uri>model://jedy_description/foo/untitled.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    -->
   </world>
 </sdf>

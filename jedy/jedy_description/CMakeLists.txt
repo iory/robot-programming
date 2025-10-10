@@ -23,4 +23,9 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(
+  DIRECTORY foo
+  DESTINATION share/${PROJECT_NAME}
+)
+
 ament_package()
