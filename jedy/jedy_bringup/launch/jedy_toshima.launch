@@ -6,7 +6,6 @@
   <arg name="publish_sensor" default="false" />
   <arg name="publish_battery_voltage" default="false" />
   <arg name="use_rcb4" default="false" doc="Flag to use RCB4 mini board"/>
-  <arg name="device" default="/dev/ttyAMA4" doc="Device path"/>
   <arg name="model_server_port" default="8123" />
   <arg name="namespace" default="" />
   <arg name="joint_group_description" default="" />
@@ -20,7 +19,6 @@
     <arg name="urdf_path" value="$(arg urdf_path)" />
     <arg name="servo_config_path" value="$(arg servo_config_path)" />
     <arg name="use_rcb4" value="$(arg use_rcb4)" />
-    <arg name="device" value="$(arg device)" />
     <arg name="model_server_port" value="$(arg model_server_port)" />
     <arg name="publish_imu" value="$(arg publish_imu)" />
     <arg name="publish_sensor" value="$(arg publish_sensor)" />
