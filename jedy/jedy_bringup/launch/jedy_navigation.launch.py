@@ -16,7 +16,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     map_yaml_file = LaunchConfiguration('map', default='')
     params_file = LaunchConfiguration('params_file',
-                                      default=os.path.join(pkg_jedy_bringup, 'config', 'nav2_params.yaml'))
+                                      default=os.path.join(pkg_jedy_bringup, 'config', 'nav2', 'nav2_params.yaml'))
     autostart = LaunchConfiguration('autostart', default='true')
     use_composition = LaunchConfiguration('use_composition', default='False')
     use_respawn = LaunchConfiguration('use_respawn', default='False')
@@ -41,7 +41,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(pkg_jedy_bringup, 'config', 'nav2_params.yaml'),
+        default_value=os.path.join(pkg_jedy_bringup, 'config', 'nav2', 'nav2_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(

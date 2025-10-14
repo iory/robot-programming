@@ -86,12 +86,13 @@ def generate_launch_description():
         output='screen',
     )
 
-    mecanum_drive_controller_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['mecanum_drive_controller', '--controller-manager', '/controller_manager'],
-        output='screen',
-    )
+    # mecanum_drive_controller_spawner removed - now using DiffDrive plugin
+    # mecanum_drive_controller_spawner = Node(
+    #     package='controller_manager',
+    #     executable='spawner',
+    #     arguments=['mecanum_drive_controller', '--controller-manager', '/controller_manager'],
+    #     output='screen',
+    # )
 
     head_controller_spawner = Node(
         package='controller_manager',
@@ -120,10 +121,11 @@ def generate_launch_description():
         actions=[joint_state_broadcaster_spawner]
     )
 
-    delayed_mecanum_controller = TimerAction(
-        period=7.0,
-        actions=[mecanum_drive_controller_spawner]
-    )
+    # delayed_mecanum_controller removed - now using DiffDrive plugin
+    # delayed_mecanum_controller = TimerAction(
+    #     period=7.0,
+    #     actions=[mecanum_drive_controller_spawner]
+    # )
 
     delayed_head_controller = TimerAction(
         period=9.0,
@@ -188,28 +190,63 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Twist to TwistStamped converter for cmd_vel (for teleop and nav2 compatibility)
-    cmd_vel_relay = Node(
-        package='jedy_bringup',
-        executable='twist_stamper.py',
-        output='screen',
-        parameters=[
-            {'use_sim_time': use_sim_time},
-            {'frame_id': 'base_link'}
-        ],
-        remappings=[
-            ('cmd_vel_in', '/cmd_vel'),
-            ('cmd_vel_out', '/mecanum_drive_controller/reference'),
-        ]
+    # base_footprint frame - required by Nav2 collision monitor
+    # This is the projection of base_link onto the ground plane
+    base_footprint_publisher = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint'],
+        output='screen'
     )
 
-    # LiDAR bridge - bridges Gazebo LiDAR to ROS2
+    # cmd_vel_relay removed - DiffDrive plugin accepts regular Twist on /cmd_vel
+    # cmd_vel_relay = Node(
+    #     package='jedy_bringup',
+    #     executable='twist_stamper.py',
+    #     output='screen',
+    #     parameters=[
+    #         {'use_sim_time': use_sim_time},
+    #         {'frame_id': 'base_link'}
+    #     ],
+    #     remappings=[
+    #         ('cmd_vel_in', '/cmd_vel'),
+    #         ('cmd_vel_out', '/mecanum_drive_controller/reference'),
+    #     ]
+    # )
+
+    # LiDAR bridge - bridges Gazebo LiDAR to ROS2 with BEST_EFFORT QoS for sensor data
     lidar_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'],
+        arguments=[
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '--ros-args',
+            '-p', 'qos_overrides./scan.subscription.reliability:=best_effort',
+            '-p', 'qos_overrides./scan.publisher.reliability:=best_effort'
+        ],
         output='screen'
     )
+
+    # DiffDrive bridge - bridges odom, TF, and cmd_vel from DiffDrive plugin
+    diffdrive_bridge_config = os.path.join(pkg_jedy_bringup, 'config', 'jedy_diffdrive_bridge.yaml')
+    diffdrive_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '--ros-args',
+            '-p', f'config_file:={diffdrive_bridge_config}'
+        ],
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}]
+    )
+
+    # odom_to_tf removed - DiffDrive plugin publishes TF directly
+    # odom_to_tf = Node(
+    #     package='jedy_bringup',
+    #     executable='odom_to_tf.py',
+    #     output='screen',
+    #     parameters=[{'use_sim_time': use_sim_time}]
+    # )
 
     return LaunchDescription([
         SetEnvironmentVariable(name='GZ_SIM_RESOURCE_PATH', value=gz_resource_path),
@@ -221,11 +258,14 @@ def generate_launch_description():
         spawn_entity,
         camera_bridge,
         camera_tf_publisher,
+        base_footprint_publisher,  # Add base_footprint frame for Nav2
         point_cloud_xyzrgb,
-        cmd_vel_relay,
+        # cmd_vel_relay removed - DiffDrive accepts regular Twist
         lidar_bridge,
+        diffdrive_bridge,  # Bridge for odom, TF, and cmd_vel from DiffDrive plugin
+        # odom_to_tf removed - DiffDrive publishes TF directly via bridge
         delayed_joint_state_broadcaster,
-        delayed_mecanum_controller,
+        # delayed_mecanum_controller removed - using DiffDrive plugin
         delayed_head_controller,
         delayed_rarm_controller,
         delayed_larm_controller,

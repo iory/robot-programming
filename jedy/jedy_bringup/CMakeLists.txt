@@ -45,6 +45,7 @@ install(
     scripts/head_trajectory_sample.py
     scripts/twist_stamper.py
     scripts/mecanum_teleop_keyboard.py
+    scripts/odom_to_tf.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
