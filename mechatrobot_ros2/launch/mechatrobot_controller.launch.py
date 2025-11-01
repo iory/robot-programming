@@ -68,10 +68,19 @@ def generate_launch_description():
         arguments=['-0.2', '0', '0', '3.1415', '0', '0', '/map', '/base_link']
     )
 
+    # rqt_joint_trajectory_controller
+    rqt_joint_trajectory_controller = Node(
+        package='rqt_joint_trajectory_controller',
+        executable='rqt_joint_trajectory_controller',
+        name='rqt_joint_trajectory_controller',
+        output='screen'
+    )
+
     return LaunchDescription([
         controller_manager,
         robot_state_publisher,
         static_tf_node,
         joint_state_broadcaster_spawner,
         delay_position_controller_spawner,
+        rqt_joint_trajectory_controller,
     ])
