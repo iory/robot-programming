@@ -6,6 +6,9 @@
       <geometry>
         <box size="0.053 0.082 0.01"/>
       </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
     </visual>
   </link>
   <link name="motor_link">
@@ -14,6 +17,9 @@
       <geometry>
 	<mesh filename="package://mechatrobot/urdf/28BYJ-48.STL" scale="0.001 0.001 0.001" />
       </geometry>
+      <material name="silver">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
     </visual>
   </link>
   <link name="link1">
@@ -23,14 +29,42 @@
 	<box size="0.01 0.1 0.005"/>
 	<!-- <mesh filename="package://mechatrobot/urdf/sample-3d-model.stl" scale="0.001 0.001 0.001" /> -->
       </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
     </visual>
   </link>
   <link name="range_sensor">
     <visual>
       <origin xyz="0 0 0" rpy="1.57 0 1.57" />
       <geometry>
-	<mesh filename="package://mechatrobot/urdf/HC-SR04.STL" scale="0.001 0.001 0.001" />
+        <box size="0.045 0.020 0.002"/>
       </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="range_sensor_left_transducer">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.57 0" />
+      <geometry>
+        <cylinder radius="0.008" length="0.012"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
+    </visual>
+  </link>
+  <link name="range_sensor_right_transducer">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.57 0" />
+      <geometry>
+        <cylinder radius="0.008" length="0.012"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
     </visual>
   </link>
 
@@ -43,6 +77,16 @@
     <parent link="base_link" />
     <child link="range_sensor" />
     <origin xyz="0.02 -0.03 0.02" />
+  </joint>
+  <joint name="sensor_to_left_transducer" type="fixed">
+    <parent link="range_sensor" />
+    <child link="range_sensor_left_transducer" />
+    <origin xyz="0.006 0.0166 0" rpy="0 0 0" />
+  </joint>
+  <joint name="sensor_to_right_transducer" type="fixed">
+    <parent link="range_sensor" />
+    <child link="range_sensor_right_transducer" />
+    <origin xyz="0.006 -0.0166 0" rpy="0 0 0" />
   </joint>
   <joint name="joint1" type="revolute">
     <axis xyz="0 0 -1"/>
