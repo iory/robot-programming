@@ -1,12 +1,12 @@
 void setup() {
-  pinMode(2, OUTPUT); // digital pinのモードを設定
+  pinMode(LED_BUILTIN, OUTPUT); // digital pinのモードを設定
 }
 
 void loop() {
 
-  digitalWrite(2, HIGH); // digital pinをHIGH/LOWに切り替え
+  digitalWrite(LED_BUILTIN, HIGH); // digital pinをHIGH/LOWに切り替え
   delay(1000);           // sleep [msec]
-  digitalWrite(2, LOW);
+  digitalWrite(LED_BUILTIN, LOW);
   delay(1000);
 
 }
