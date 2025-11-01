@@ -40,10 +40,35 @@ source install/setup.bash
 ros2 launch mechatrobot_ros2 mechatrobot_driver.launch.py port:=/dev/ttyUSB0
 ```
 
-### Launch the robot controller
+### Launch the robot controller (with ros2_control)
+
+ros2_controlを使用したコントローラー起動（follow_joint_trajectoryアクションが使えます）：
 
 ```bash
 ros2 launch mechatrobot_ros2 mechatrobot_controller.launch.py
+```
+
+This launches:
+- Controller manager with mock hardware
+- Joint state broadcaster
+- Joint trajectory controller (position_trajectory_controller)
+- Robot state publisher
+
+After launching, you can control the robot using the FollowJointTrajectory action:
+
+```bash
+# Test the trajectory controller
+ros2 action send_goal /position_trajectory_controller/follow_joint_trajectory \
+  control_msgs/action/FollowJointTrajectory \
+  "{
+    trajectory: {
+      joint_names: [joint1],
+      points: [
+        { positions: [0.0], time_from_start: { sec: 0, nanosec: 0 } },
+        { positions: [1.57], time_from_start: { sec: 2, nanosec: 0 } }
+      ]
+    }
+  }"
 ```
 
 ### Launch the display (RViz2)

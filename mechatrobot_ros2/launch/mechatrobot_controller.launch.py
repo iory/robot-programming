@@ -1,21 +1,31 @@
+import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.substitutions import PathJoinSubstitution
+from launch.actions import ExecuteProcess, RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
     # Get package directories
-    pkg_share = FindPackageShare('mechatrobot_ros2')
+    pkg_mechatrobot_ros2 = get_package_share_directory('mechatrobot_ros2')
 
     # Paths
-    urdf_file = PathJoinSubstitution([pkg_share, 'urdf', 'robot.urdf'])
+    urdf_file = os.path.join(pkg_mechatrobot_ros2, 'urdf', 'robot.urdf')
+    controllers_file = os.path.join(pkg_mechatrobot_ros2, 'config', 'controllers.yaml')
 
-    # Robot control node
-    robot_control_node = Node(
-        package='mechatrobot_ros2',
-        executable='robot_control',
-        name='robot_control',
+    # Read URDF file
+    with open(urdf_file, 'r') as infp:
+        robot_desc = infp.read()
+
+    # Controller manager
+    controller_manager = Node(
+        package='controller_manager',
+        executable='ros2_control_node',
+        parameters=[
+            {'robot_description': robot_desc},
+            controllers_file
+        ],
         output='screen'
     )
 
@@ -25,10 +35,29 @@ def generate_launch_description():
         executable='robot_state_publisher',
         name='robot_state_publisher',
         output='screen',
-        parameters=[{
-            'robot_description': urdf_file
-        }],
-        respawn=True
+        parameters=[{'robot_description': robot_desc}]
+    )
+
+    # Joint state broadcaster spawner
+    joint_state_broadcaster_spawner = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_state_broadcaster'],
+        output='screen'
+    )
+
+    # Position trajectory controller spawner
+    position_trajectory_controller_spawner = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'position_trajectory_controller'],
+        output='screen'
+    )
+
+    # Delay position controller spawner after joint state broadcaster
+    delay_position_controller_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[position_trajectory_controller_spawner],
+        )
     )
 
     # Static transform publisher (map to base_link)
@@ -40,7 +69,9 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        robot_control_node,
+        controller_manager,
         robot_state_publisher,
         static_tf_node,
+        joint_state_broadcaster_spawner,
+        delay_position_controller_spawner,
     ])
