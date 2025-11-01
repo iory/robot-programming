@@ -5,7 +5,7 @@
  *  All rights reserved.
  *
  *  Modified 2020, by Kei OKada and Yuki Asano
- *  Modified 2025, for ROS2 migration
+ *  Modified 2025, for ROS2 migration and ros2_control integration
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions
@@ -31,226 +31,203 @@
  *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
  *  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- *  POSSIBILITY OF SUCH DAMAGE.
+ *  ANY WAY OUT OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ *  POSSIBILITY OF DAMAGE.
  *********************************************************************/
-#include <signal.h>
-#include <pthread.h>
-#include <atomic>
-#include <condition_variable>
-#include <thread>
 #include <chrono>
-#include <vector>
-#include <string>
 #include <memory>
+#include <string>
+#include <vector>
+
+#include "hardware_interface/system_interface.hpp"
+#include "hardware_interface/handle.hpp"
+#include "hardware_interface/hardware_info.hpp"
+#include "hardware_interface/types/hardware_interface_return_values.hpp"
+#include "hardware_interface/types/hardware_interface_type_values.hpp"
+#include "rclcpp/rclcpp.hpp"
+#include "rclcpp_lifecycle/state.hpp"
+#include "std_msgs/msg/int64.hpp"
 
 using namespace std::chrono_literals;
 
-// ROS2
-#include <rclcpp/rclcpp.hpp>
-
-// messages
-#include <std_msgs/msg/int64.hpp>
-#include <std_msgs/msg/float64.hpp>
-
-namespace robot_control
+namespace mechatrobot_hardware
 {
-struct JointData
-{
-  std::string name_;
-  double cmd_;
-  double pos_;
-  double vel_;
-  double eff_;
-  int home_encoder_offset_;
-};
 
-class JointControlInterface
+class MechatrobotSystemHardware : public hardware_interface::SystemInterface
 {
 public:
-  JointControlInterface(std::shared_ptr<rclcpp::Node> node, int joint_id,
-                        std::string command_topic, std::string position_topic)
-    : node_(node)
+  RCLCPP_SHARED_PTR_DEFINITIONS(MechatrobotSystemHardware)
+
+  hardware_interface::CallbackReturn on_init(
+    const hardware_interface::HardwareInfo & info) override
   {
-    // create joint name
-    std::stringstream ss;
-    ss << "joint" << joint_id;
-    joint.name_ = ss.str();
-
-    // Publishers and subscribers
-    joint_pub_ = node_->create_publisher<std_msgs::msg::Int64>(command_topic, 10);
-    joint_sub_ = node_->create_subscription<std_msgs::msg::Int64>(
-        position_topic, 10,
-        std::bind(&JointControlInterface::positionCB, this, std::placeholders::_1));
-
-    // initialize joint/command
-    joint.cmd_ = joint.pos_ = 0;
-    joint.vel_ = joint.eff_ = 0;
-
-    // initialize timing
-    last_received_ = node_->now();
-    last_read_ = node_->now();
-  }
-
-  ~JointControlInterface() = default;
-
-  void read()
-  {
-    if (last_read_ >= last_received_)
-    {  // no received message after last read
-      std::unique_lock<std::mutex> lk(cv_m_);
-      if (cv_.wait_for(lk, 100ms, [] { return false; }))
-      {
-        RCLCPP_ERROR_STREAM(node_->get_logger(),
-                           "Did not receive message " << joint.name_ << " for 100ms");
-      }
+    if (hardware_interface::SystemInterface::on_init(info) !=
+        hardware_interface::CallbackReturn::SUCCESS)
+    {
+      return hardware_interface::CallbackReturn::ERROR;
     }
-    RCLCPP_DEBUG_STREAM(node_->get_logger(), joint.name_ << " read() : " << joint.pos_);
-    joint.pos_ = joint.cmd_;  // do loop back
-    last_read_ = node_->now();
+
+    // Initialize joint data structures
+    hw_commands_.resize(info_.joints.size(), 0.0);
+    hw_positions_.resize(info_.joints.size(), 0.0);
+    hw_velocities_.resize(info_.joints.size(), 0.0);
+    hw_efforts_.resize(info_.joints.size(), 0.0);
+
+    // Store joint names
+    for (const auto & joint : info_.joints)
+    {
+      joint_names_.push_back(joint.name);
+    }
+
+    return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  void positionCB(const std_msgs::msg::Int64::SharedPtr msg)
+  hardware_interface::CallbackReturn on_configure(
+    const rclcpp_lifecycle::State & /*previous_state*/) override
   {
-    joint.pos_ = msg->data * M_PI / 180.0;
-    cv_.notify_all();
-    last_received_ = node_->now();
+    // Create ROS2 node for communication
+    node_ = rclcpp::Node::make_shared("mechatrobot_hardware_interface");
+
+    // Create publishers and subscribers for each joint
+    for (size_t i = 0; i < info_.joints.size(); i++)
+    {
+      std::string motor_name = "motor" + std::to_string(i + 1);
+
+      // Publisher for commands
+      auto pub = node_->create_publisher<std_msgs::msg::Int64>(
+        "/" + motor_name + "/command", 10);
+      command_pubs_.push_back(pub);
+
+      // Subscriber for positions
+      auto sub = node_->create_subscription<std_msgs::msg::Int64>(
+        "/" + motor_name + "/position", 10,
+        [this, i](const std_msgs::msg::Int64::SharedPtr msg) {
+          position_callback(msg, i);
+        });
+      position_subs_.push_back(sub);
+    }
+
+    RCLCPP_INFO(node_->get_logger(), "Mechatrobot hardware interface configured");
+    return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  void write()
+  std::vector<hardware_interface::StateInterface> export_state_interfaces() override
   {
-    RCLCPP_DEBUG_STREAM(node_->get_logger(), joint.name_ << " write() : " << joint.cmd_);
-    auto msg = std_msgs::msg::Int64();
-    msg.data = static_cast<int>(joint.cmd_ * 180 / M_PI);
-    joint_pub_->publish(msg);
+    std::vector<hardware_interface::StateInterface> state_interfaces;
+
+    for (size_t i = 0; i < info_.joints.size(); i++)
+    {
+      state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_positions_[i]));
+      state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &hw_velocities_[i]));
+      state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &hw_efforts_[i]));
+    }
+
+    return state_interfaces;
   }
 
-  void shutdown()
+  std::vector<hardware_interface::CommandInterface> export_command_interfaces() override
   {
+    std::vector<hardware_interface::CommandInterface> command_interfaces;
+
+    for (size_t i = 0; i < info_.joints.size(); i++)
+    {
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_commands_[i]));
+    }
+
+    return command_interfaces;
   }
 
-  JointData joint;
+  hardware_interface::CallbackReturn on_activate(
+    const rclcpp_lifecycle::State & /*previous_state*/) override
+  {
+    RCLCPP_INFO(node_->get_logger(), "Activating Mechatrobot hardware interface");
 
-protected:
-  std::shared_ptr<rclcpp::Node> node_;
-  rclcpp::Publisher<std_msgs::msg::Int64>::SharedPtr joint_pub_;
-  rclcpp::Subscription<std_msgs::msg::Int64>::SharedPtr joint_sub_;
-  rclcpp::Time last_received_;
-  rclcpp::Time last_read_;
-  // lock
-  std::condition_variable cv_;
-  std::mutex cv_m_;
-};
+    // Initialize commands to current positions
+    for (size_t i = 0; i < hw_commands_.size(); i++)
+    {
+      hw_commands_[i] = hw_positions_[i];
+    }
 
-class RobotHardwareInterface
-{
+    return hardware_interface::CallbackReturn::SUCCESS;
+  }
+
+  hardware_interface::CallbackReturn on_deactivate(
+    const rclcpp_lifecycle::State & /*previous_state*/) override
+  {
+    RCLCPP_INFO(node_->get_logger(), "Deactivating Mechatrobot hardware interface");
+    return hardware_interface::CallbackReturn::SUCCESS;
+  }
+
+  hardware_interface::return_type read(
+    const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) override
+  {
+    // Spin the node to process callbacks
+    rclcpp::spin_some(node_);
+
+    // Position data is updated via callbacks
+    // Velocity and effort are not available from hardware, set to 0
+    for (size_t i = 0; i < hw_velocities_.size(); i++)
+    {
+      hw_velocities_[i] = 0.0;
+      hw_efforts_[i] = 0.0;
+    }
+
+    return hardware_interface::return_type::OK;
+  }
+
+  hardware_interface::return_type write(
+    const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) override
+  {
+    // Publish commands to motors
+    for (size_t i = 0; i < hw_commands_.size(); i++)
+    {
+      auto msg = std_msgs::msg::Int64();
+      // Convert from radians to degrees
+      msg.data = static_cast<int>(hw_commands_[i] * 180.0 / M_PI);
+      command_pubs_[i]->publish(msg);
+
+      RCLCPP_DEBUG(node_->get_logger(),
+                   "Joint %zu command: %.2f rad (%ld deg)",
+                   i, hw_commands_[i], msg.data);
+    }
+
+    return hardware_interface::return_type::OK;
+  }
+
 private:
-  std::shared_ptr<rclcpp::Node> node_;
-  typedef std::vector<std::shared_ptr<JointControlInterface>> JointControlContainer;
-  JointControlContainer controls_;
-
-public:
-  RobotHardwareInterface(std::shared_ptr<rclcpp::Node> node)
-    : node_(node)
+  void position_callback(const std_msgs::msg::Int64::SharedPtr msg, size_t joint_index)
   {
-    registerControl(std::make_shared<JointControlInterface>(
-        node_, 1, "/motor1/command", "/motor1/position"));
+    // Convert from degrees to radians
+    hw_positions_[joint_index] = msg->data * M_PI / 180.0;
+
+    RCLCPP_DEBUG(node_->get_logger(),
+                 "Joint %zu position: %ld deg (%.2f rad)",
+                 joint_index, msg->data, hw_positions_[joint_index]);
   }
 
-  ~RobotHardwareInterface()
-  {
-    shutdown();
-  }
+  // ROS2 node
+  rclcpp::Node::SharedPtr node_;
 
-  void registerControl(std::shared_ptr<JointControlInterface> control)
-  {
-    controls_.push_back(control);
-  }
+  // Joint data
+  std::vector<std::string> joint_names_;
+  std::vector<double> hw_commands_;
+  std::vector<double> hw_positions_;
+  std::vector<double> hw_velocities_;
+  std::vector<double> hw_efforts_;
 
-  void read()
-  {
-    for (auto& control : controls_)
-    {
-      control->read();
-    }
-  }
-
-  void write()
-  {
-    for (auto& control : controls_)
-    {
-      control->write();
-    }
-  }
-
-  void shutdown()
-  {
-    for (auto& control : controls_)
-    {
-      control->shutdown();
-    }
-    controls_.clear();
-  }
-
-  rclcpp::Time getTime()
-  {
-    return node_->now();
-  }
-
-  rclcpp::Duration getPeriod()
-  {
-    return rclcpp::Duration::from_seconds(0.001);
-  }
+  // ROS2 communication
+  std::vector<rclcpp::Publisher<std_msgs::msg::Int64>::SharedPtr> command_pubs_;
+  std::vector<rclcpp::Subscription<std_msgs::msg::Int64>::SharedPtr> position_subs_;
 };
 
-}  // namespace robot_control
+}  // namespace mechatrobot_hardware
 
-static std::atomic<bool> g_quit{false};
+#include "pluginlib/class_list_macros.hpp"
 
-void controlLoop(std::shared_ptr<rclcpp::Node> node)
-{
-  // Initialize the hardware interface
-  robot_control::RobotHardwareInterface robot(node);
-
-  RCLCPP_INFO(node->get_logger(), "started controlLoop");
-
-  rclcpp::Rate rate(10);  // 10 Hz
-  while (rclcpp::ok() && !g_quit)
-  {
-    robot.read();
-    robot.write();
-    rate.sleep();
-  }
-
-  robot.shutdown();
-}
-
-void quitRequested(int sig)
-{
-  g_quit = true;
-  std::cerr << ";; call quitRequested sig(" << sig << ")" << std::endl;
-}
-
-int main(int argc, char* argv[])
-{
-  // Initialize ROS2
-  rclcpp::init(argc, argv);
-  auto node = std::make_shared<rclcpp::Node>("robot_control");
-
-  // Catch attempts to quit
-  signal(SIGTERM, quitRequested);
-  signal(SIGINT, quitRequested);
-  signal(SIGHUP, quitRequested);
-
-  // Start control loop in separate thread
-  std::thread control_thread(controlLoop, node);
-
-  // Spin the node
-  rclcpp::spin(node);
-
-  // Wait for control thread to finish
-  control_thread.join();
-
-  rclcpp::shutdown();
-  return 0;
-}
+PLUGINLIB_EXPORT_CLASS(
+  mechatrobot_hardware::MechatrobotSystemHardware,
+  hardware_interface::SystemInterface)

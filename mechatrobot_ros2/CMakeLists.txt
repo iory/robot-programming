@@ -8,24 +8,35 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(hardware_interface REQUIRED)
+find_package(pluginlib REQUIRED)
 
 # Include directories
 include_directories(
   include
 )
 
-# Declare a C++ executable
-add_executable(robot_control src/robot_control.cpp)
-ament_target_dependencies(robot_control
+# Declare a C++ library for hardware interface plugin
+add_library(mechatrobot_hardware_interface SHARED
+  src/robot_control.cpp
+)
+ament_target_dependencies(mechatrobot_hardware_interface
   rclcpp
+  rclcpp_lifecycle
   std_msgs
+  hardware_interface
+  pluginlib
 )
 
-# Install executables
+# Export the plugin
+pluginlib_export_plugin_description_file(hardware_interface mechatrobot_hardware_interface.xml)
+
+# Install library
 install(TARGETS
-  robot_control
-  DESTINATION lib/${PROJECT_NAME}
+  mechatrobot_hardware_interface
+  DESTINATION lib
 )
 
 # Install Python scripts
