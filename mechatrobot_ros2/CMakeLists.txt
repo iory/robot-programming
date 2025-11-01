@@ -31,6 +31,7 @@ install(TARGETS
 # Install Python scripts
 install(PROGRAMS
   scripts/motor-command-by-face.py
+  scripts/led_controller.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

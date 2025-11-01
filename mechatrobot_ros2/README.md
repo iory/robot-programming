@@ -21,6 +21,8 @@ This package provides ROS2 control interface for the mechatrobot platform. It in
 - micro_ros_agent (replaces rosserial for ROS2)
 - usb_cam
 - opencv_apps (if available for ROS2)
+- gazebo_ros (for simulation)
+- joint_state_publisher_gui (for Gazebo simulation)
 
 ## Installation
 
@@ -56,6 +58,36 @@ ros2 launch mechatrobot_ros2 mechatrobot_display.launch.py
 ros2 launch mechatrobot_ros2 sample_face_detect.launch.py
 ros2 run mechatrobot_ros2 motor-command-by-face.py
 ```
+
+### Launch in Gazebo simulation
+
+```bash
+ros2 launch mechatrobot_ros2 gazebo.launch.py
+```
+
+This will:
+- Start Gazebo simulator
+- Spawn the mechatrobot model
+- Launch robot_state_publisher
+- Open joint_state_publisher_gui for manual joint control
+- Start RViz2 for robot visualization
+- Launch LED controller node
+
+You can control the joint1 angle using the GUI slider.
+
+### LED Control
+
+The LED controller node subscribes to `/led/state` topic and publishes color commands. To control the LED:
+
+```bash
+# Turn LED ON (Red)
+ros2 topic pub /led/state std_msgs/msg/Bool "data: true"
+
+# Turn LED OFF (Gray)
+ros2 topic pub /led/state std_msgs/msg/Bool "data: false"
+```
+
+The LED state will be reflected in both Gazebo and RViz2 visualizations through the `/led_color` topic.
 
 ## Migration from ROS1
 
