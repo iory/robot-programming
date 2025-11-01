@@ -67,6 +67,17 @@
       </material>
     </visual>
   </link>
+  <link name="arduino_nano">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.045 0.018 0.005"/>
+      </geometry>
+      <material name="arduino_red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
 
   <joint name="base_to_motor" type="fixed">
     <parent link="breadboard_link" />
@@ -87,6 +98,11 @@
     <parent link="range_sensor" />
     <child link="range_sensor_right_transducer" />
     <origin xyz="0.006 -0.0166 0" rpy="0 0 0" />
+  </joint>
+  <joint name="breadboard_to_arduino" type="fixed">
+    <parent link="breadboard_link" />
+    <child link="arduino_nano" />
+    <origin xyz="0 0.022 0.0075" rpy="0 0 1.57" />
   </joint>
   <joint name="joint1" type="revolute">
     <axis xyz="0 0 -1"/>
