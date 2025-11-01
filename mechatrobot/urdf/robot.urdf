@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot name="robot">
-  <link name="base_link">
+  <link name="breadboard_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -69,12 +69,12 @@
   </link>
 
   <joint name="base_to_motor" type="fixed">
-    <parent link="base_link" />
+    <parent link="breadboard_link" />
     <child link="motor_link" />
     <origin xyz="0 0.08 0" rpy="0 0 0" />
   </joint>
   <joint name="base_to_sensor" type="fixed">
-    <parent link="base_link" />
+    <parent link="breadboard_link" />
     <child link="range_sensor" />
     <origin xyz="0.02 -0.03 0.02" />
   </joint>
