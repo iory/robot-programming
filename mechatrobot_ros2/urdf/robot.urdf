@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
 <robot name="robot">
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.053 0.082 0.01"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+  </link>
+
   <link name="breadboard_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -11,29 +23,37 @@
       </material>
     </visual>
   </link>
+
+  <joint name="base_to_breadboard" type="fixed">
+    <parent link="base_link"/>
+    <child link="breadboard_link"/>
+    <origin xyz="0 0 0.005" rpy="0 0 0"/>
+  </joint>
+
   <link name="motor_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 1.57"/>
       <geometry>
-	<mesh filename="package://mechatrobot/urdf/28BYJ-48.STL" scale="0.001 0.001 0.001" />
+        <mesh filename="package://mechatrobot_ros2/urdf/28BYJ-48.STL" scale="0.001 0.001 0.001" />
       </geometry>
       <material name="silver">
         <color rgba="0.75 0.75 0.75 1"/>
       </material>
     </visual>
   </link>
+
   <link name="link1">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-	<box size="0.01 0.1 0.005"/>
-	<!-- <mesh filename="package://mechatrobot/urdf/sample-3d-model.stl" scale="0.001 0.001 0.001" /> -->
+        <box size="0.01 0.1 0.005"/>
       </geometry>
       <material name="black">
         <color rgba="0 0 0 1"/>
       </material>
     </visual>
   </link>
+
   <link name="range_sensor">
     <visual>
       <origin xyz="0 0 0" rpy="1.57 0 1.57" />
@@ -45,6 +65,7 @@
       </material>
     </visual>
   </link>
+
   <link name="range_sensor_left_transducer">
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0" />
@@ -56,6 +77,7 @@
       </material>
     </visual>
   </link>
+
   <link name="range_sensor_right_transducer">
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0" />
@@ -67,6 +89,7 @@
       </material>
     </visual>
   </link>
+
   <link name="arduino_nano">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -78,6 +101,7 @@
       </material>
     </visual>
   </link>
+
   <link name="led">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -95,31 +119,37 @@
     <child link="motor_link" />
     <origin xyz="0 0.08 0" rpy="0 0 0" />
   </joint>
+
   <joint name="base_to_sensor" type="fixed">
     <parent link="breadboard_link" />
     <child link="range_sensor" />
     <origin xyz="0.02 -0.03 0.02" />
   </joint>
+
   <joint name="sensor_to_left_transducer" type="fixed">
     <parent link="range_sensor" />
     <child link="range_sensor_left_transducer" />
     <origin xyz="0.006 0.0166 0" rpy="0 0 0" />
   </joint>
+
   <joint name="sensor_to_right_transducer" type="fixed">
     <parent link="range_sensor" />
     <child link="range_sensor_right_transducer" />
     <origin xyz="0.006 -0.0166 0" rpy="0 0 0" />
   </joint>
+
   <joint name="breadboard_to_arduino" type="fixed">
     <parent link="breadboard_link" />
     <child link="arduino_nano" />
     <origin xyz="0 0.022 0.0075" rpy="0 0 1.57" />
   </joint>
+
   <joint name="arduino_to_led" type="fixed">
     <parent link="arduino_nano" />
     <child link="led" />
     <origin xyz="0.01 0 0.0035" rpy="0 0 0" />
   </joint>
+
   <joint name="joint1" type="revolute">
     <axis xyz="0 0 -1"/>
     <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
@@ -127,15 +157,5 @@
     <parent link="motor_link" />
     <child link="link1" />
   </joint>
-
-  <gazebo reference="led">
-    <material>Gazebo/RedGlow</material>
-    <visual>
-      <plugin name="led_visual_plugin" filename="libgazebo_ros_visual.so">
-        <topicName>/led/visual</topicName>
-        <link_name>led</link_name>
-      </plugin>
-    </visual>
-  </gazebo>
 
 </robot>

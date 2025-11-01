@@ -21,8 +21,8 @@ This package provides ROS2 control interface for the mechatrobot platform. It in
 - micro_ros_agent (replaces rosserial for ROS2)
 - usb_cam
 - opencv_apps (if available for ROS2)
-- gazebo_ros (for simulation)
-- joint_state_publisher_gui (for Gazebo simulation)
+- joint_state_publisher_gui
+- rviz2
 
 ## Installation
 
@@ -48,9 +48,18 @@ ros2 launch mechatrobot_ros2 mechatrobot_controller.launch.py
 
 ### Launch the display (RViz2)
 
+RViz2でロボットモデルを表示し、GUIでジョイント角度を制御：
+
 ```bash
-ros2 launch mechatrobot_ros2 mechatrobot_display.launch.py
+ros2 launch mechatrobot_ros2 display.launch.py
 ```
+
+This launches:
+- RViz2 for visualization
+- Joint State Publisher GUI for manual joint control
+- LED controller for LED state visualization
+
+You can control the joint1 angle using the GUI slider.
 
 ### Face detection demo
 
@@ -58,22 +67,6 @@ ros2 launch mechatrobot_ros2 mechatrobot_display.launch.py
 ros2 launch mechatrobot_ros2 sample_face_detect.launch.py
 ros2 run mechatrobot_ros2 motor-command-by-face.py
 ```
-
-### Launch in Gazebo simulation
-
-```bash
-ros2 launch mechatrobot_ros2 gazebo.launch.py
-```
-
-This will:
-- Start Gazebo simulator
-- Spawn the mechatrobot model
-- Launch robot_state_publisher
-- Open joint_state_publisher_gui for manual joint control
-- Start RViz2 for robot visualization
-- Launch LED controller node
-
-You can control the joint1 angle using the GUI slider.
 
 ### LED Control
 
@@ -87,8 +80,7 @@ ros2 topic pub /led/state std_msgs/msg/Bool "data: true"
 ros2 topic pub /led/state std_msgs/msg/Bool "data: false"
 ```
 
-The LED state will be reflected in both Gazebo and RViz2 visualizations:
-- **Gazebo**: Uses `/led_color` topic to control LED material color
+The LED state will be reflected in RViz2 visualization:
 - **RViz2**: Displays a Marker (sphere) at the LED position with the corresponding color on `/led_marker` topic
 
 The LED Marker in RViz2 appears as a small sphere overlaid on the robot model at the LED link position:
