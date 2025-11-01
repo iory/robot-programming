@@ -80,12 +80,11 @@ ros2 topic pub /led/state std_msgs/msg/Bool "data: true"
 ros2 topic pub /led/state std_msgs/msg/Bool "data: false"
 ```
 
-The LED state will be reflected in RViz2 visualization:
-- **RViz2**: Displays a Marker (sphere) at the LED position with the corresponding color on `/led_marker` topic
+The LED state will be reflected in RViz2 as a Marker (sphere) at the LED position:
+- **ON**: Orange sphere (R=1.0, G=0.5, B=0.0)
+- **OFF**: Dark gray sphere (R=0.3, G=0.3, B=0.3)
 
-The LED Marker in RViz2 appears as a small sphere overlaid on the robot model at the LED link position:
-- **ON**: Orange (R=1.0, G=0.5, B=0.0)
-- **OFF**: Dark Gray (R=0.3, G=0.3, B=0.3)
+The LED controller subscribes to `/led/state` (Bool) and publishes a visualization marker to `/led_marker`.
 
 ## Migration from ROS1
 
