@@ -77,17 +77,23 @@ You can control the joint1 angle using the GUI slider.
 
 ### LED Control
 
-The LED controller node subscribes to `/led/state` topic and publishes color commands. To control the LED:
+The LED controller node provides simple ON/OFF control with fixed colors:
 
 ```bash
-# Turn LED ON (Red)
+# Turn LED ON (Orange)
 ros2 topic pub /led/state std_msgs/msg/Bool "data: true"
 
 # Turn LED OFF (Gray)
 ros2 topic pub /led/state std_msgs/msg/Bool "data: false"
 ```
 
-The LED state will be reflected in both Gazebo and RViz2 visualizations through the `/led_color` topic.
+The LED state will be reflected in both Gazebo and RViz2 visualizations:
+- **Gazebo**: Uses `/led_color` topic to control LED material color
+- **RViz2**: Displays a Marker (sphere) at the LED position with the corresponding color on `/led_marker` topic
+
+The LED Marker in RViz2 appears as a small sphere overlaid on the robot model at the LED link position:
+- **ON**: Orange (R=1.0, G=0.5, B=0.0)
+- **OFF**: Dark Gray (R=0.3, G=0.3, B=0.3)
 
 ## Migration from ROS1
 
