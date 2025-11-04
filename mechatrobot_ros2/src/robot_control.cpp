@@ -38,6 +38,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <thread>
+#include <atomic>
 
 #include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/handle.hpp"
@@ -88,6 +90,9 @@ public:
     // Create ROS2 node for communication
     node_ = rclcpp::Node::make_shared("mechatrobot_hardware_interface");
 
+    // Initialize last position update time
+    last_position_update_ = node_->now();
+
     // Create publishers and subscribers for each joint
     for (size_t i = 0; i < info_.joints.size(); i++)
     {
@@ -106,6 +111,16 @@ public:
         });
       position_subs_.push_back(sub);
     }
+
+    // Start executor thread to process callbacks
+    executor_running_.store(true);
+    executor_ = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+    executor_->add_node(node_);
+    executor_thread_ = std::thread([this]() {
+      while (rclcpp::ok() && executor_running_.load()) {
+        executor_->spin_once(std::chrono::milliseconds(10));
+      }
+    });
 
     RCLCPP_INFO(node_->get_logger(), "Mechatrobot hardware interface configured");
     return hardware_interface::CallbackReturn::SUCCESS;
@@ -152,6 +167,9 @@ public:
       hw_commands_[i] = hw_positions_[i];
     }
 
+    // Initialize last update time
+    last_position_update_ = node_->now();
+
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
@@ -159,19 +177,37 @@ public:
     const rclcpp_lifecycle::State & /*previous_state*/) override
   {
     RCLCPP_INFO(node_->get_logger(), "Deactivating Mechatrobot hardware interface");
+
+    // Stop executor thread
+    if (executor_thread_.joinable()) {
+      executor_running_.store(false);
+      executor_thread_.join();
+    }
+
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
   hardware_interface::return_type read(
     const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) override
   {
-    // Spin the node to process callbacks
-    rclcpp::spin_some(node_);
+    // Position data is updated via callbacks in a separate thread
+    // Check if position feedback is stale (not updated for more than 200ms)
+    auto now = node_->now();
+    auto time_since_update = (now - last_position_update_).seconds();
 
-    // Position data is updated via callbacks
-    // Velocity and effort are not available from hardware, set to 0
-    for (size_t i = 0; i < hw_velocities_.size(); i++)
+    // If feedback is not received or stale, loop back command as position
+    // This prevents oscillation when feedback is delayed or unavailable
+    for (size_t i = 0; i < hw_positions_.size(); i++)
     {
+      if (time_since_update > 0.2)
+      {
+        // Feedback is stale, use command as position (loop back)
+        RCLCPP_INFO_THROTTLE(node_->get_logger(), *node_->get_clock(), 1000,
+                             "Position feedback stale (%.3f s), using command as position",
+                             time_since_update);
+        hw_positions_[i] = hw_commands_[i];
+      }
+
       hw_velocities_[i] = 0.0;
       hw_efforts_[i] = 0.0;
     }
@@ -190,9 +226,10 @@ public:
       msg.data = static_cast<int>(hw_commands_[i] * 180.0 / M_PI);
       command_pubs_[i]->publish(msg);
 
-      RCLCPP_DEBUG(node_->get_logger(),
-                   "Joint %zu command: %.2f rad (%ld deg)",
-                   i, hw_commands_[i], msg.data);
+      RCLCPP_INFO_THROTTLE(node_->get_logger(), *node_->get_clock(), 1000,
+                           "Joint %zu - Command: %.2f rad (%ld deg), Current: %.2f rad, Error: %.2f rad",
+                           i, hw_commands_[i], msg.data, hw_positions_[i],
+                           hw_commands_[i] - hw_positions_[i]);
     }
 
     return hardware_interface::return_type::OK;
@@ -204,9 +241,12 @@ private:
     // Convert from degrees to radians
     hw_positions_[joint_index] = msg->data * M_PI / 180.0;
 
-    RCLCPP_DEBUG(node_->get_logger(),
-                 "Joint %zu position: %ld deg (%.2f rad)",
-                 joint_index, msg->data, hw_positions_[joint_index]);
+    // Update last position update time
+    last_position_update_ = node_->now();
+
+    RCLCPP_INFO_THROTTLE(node_->get_logger(), *node_->get_clock(), 1000,
+                         "Joint %zu position received: %ld deg (%.2f rad)",
+                         joint_index, msg->data, hw_positions_[joint_index]);
   }
 
   // ROS2 node
@@ -222,6 +262,14 @@ private:
   // ROS2 communication
   std::vector<rclcpp::Publisher<std_msgs::msg::Int64>::SharedPtr> command_pubs_;
   std::vector<rclcpp::Subscription<std_msgs::msg::Int64>::SharedPtr> position_subs_;
+
+  // Position feedback tracking
+  rclcpp::Time last_position_update_;
+
+  // Executor for processing callbacks in separate thread
+  rclcpp::executors::SingleThreadedExecutor::SharedPtr executor_;
+  std::thread executor_thread_;
+  std::atomic<bool> executor_running_{false};
 };
 
 }  // namespace mechatrobot_hardware

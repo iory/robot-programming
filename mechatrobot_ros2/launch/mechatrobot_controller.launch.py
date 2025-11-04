@@ -26,7 +26,8 @@ def generate_launch_description():
             {'robot_description': robot_desc},
             controllers_file
         ],
-        output='screen'
+        output='screen',
+        arguments=['--ros-args', '--log-level', 'mechatrobot_hardware_interface:=info']
     )
 
     # Robot state publisher

@@ -25,7 +25,7 @@ position_trajectory_controller:
       - velocity
 
     constraints:
-      goal_time: 2.0
+      goal_time: 10.0
       stopped_velocity_tolerance: 0.1
       joint1:
         trajectory: 0.0
