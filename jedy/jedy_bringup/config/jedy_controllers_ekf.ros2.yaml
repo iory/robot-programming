@@ -23,24 +23,17 @@ mecanum_drive_controller:
 
     front_left_wheel_command_joint_name: "front_left_wheel_joint"
     front_right_wheel_command_joint_name: "front_right_wheel_joint"
-    rear_left_wheel_command_joint_name: "rear_left_wheel_joint"
     rear_right_wheel_command_joint_name: "rear_right_wheel_joint"
+    rear_left_wheel_command_joint_name: "rear_left_wheel_joint"
 
     kinematics:
       base_frame_offset: { x: 0.0, y: 0.0, theta: 0.0 }
       wheels_radius: 0.030083
-      # Wheel positions from URDF real_base_link frame:
-      # front_right: x=-0.0505, y=-0.097, z= 0.0435
-      # front_left:  x= 0.0505, y=-0.097, z= 0.0435
-      # rear_right:  x=-0.0505, y=-0.097, z=-0.0435
-      # rear_left:   x= 0.0505, y=-0.097, z=-0.0435
-      # Track width (X): 0.101m, Wheelbase (Z): 0.087m
-      # Calculated: sqrt(lx^2 + ly^2) = sqrt(0.0505^2 + 0.0435^2) = 0.0666
-      sum_of_robot_center_projection_on_X_Y_axis: 0.0666  # Try sqrt method
+      sum_of_robot_center_projection_on_X_Y_axis: 0.101
 
     base_frame_id: "base_link"
     odom_frame_id: "odom"
-    enable_odom_tf: false  # Set to false only when using robot_localization EKF
+    enable_odom_tf: false  # DISABLED - robot_localization EKF publishes odom->base_link TF
     twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
     pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
 

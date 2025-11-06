@@ -228,6 +228,15 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}]
     )
 
+    # TF relay for mecanum_drive_controller odometry
+    odom_tf_relay = Node(
+        package='topic_tools',
+        executable='relay',
+        arguments=['/mecanum_drive_controller/tf_odometry', '/tf'],
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}]
+    )
+
     # LiDAR bridge - bridges Gazebo LiDAR to ROS2 with BEST_EFFORT QoS for sensor data
     lidar_bridge = Node(
         package='ros_gz_bridge',
@@ -308,6 +317,7 @@ def generate_launch_description():
         base_footprint_publisher,  # Add base_footprint frame for Nav2
         point_cloud_xyzrgb,
         cmd_vel_relay,
+        odom_tf_relay,
         lidar_bridge,
         scan_frame_changer,
         imu_bridge,
