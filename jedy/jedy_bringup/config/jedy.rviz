@@ -334,6 +334,138 @@ Visualization Manager:
         Value: /map_updates
       Use Timestamp: false
       Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        base_footprint:
+          Value: false
+        base_laser:
+          Value: false
+        base_link:
+          Value: true
+        camera_color_frame:
+          Value: false
+        camera_color_optical_frame:
+          Value: false
+        camera_depth_frame:
+          Value: false
+        camera_depth_optical_frame:
+          Value: false
+        camera_link:
+          Value: false
+        front_left_wheel_link:
+          Value: false
+        front_right_wheel_link:
+          Value: false
+        head_link0:
+          Value: false
+        head_link1:
+          Value: false
+        jedy/head_link1/camera:
+          Value: false
+        larm_link0:
+          Value: false
+        larm_link1:
+          Value: false
+        larm_link2:
+          Value: false
+        larm_link3:
+          Value: false
+        larm_link4:
+          Value: false
+        larm_link5:
+          Value: false
+        larm_link6:
+          Value: false
+        larm_link7:
+          Value: false
+        larm_link8:
+          Value: false
+        odom:
+          Value: true
+        rarm_link0:
+          Value: false
+        rarm_link1:
+          Value: false
+        rarm_link2:
+          Value: false
+        rarm_link3:
+          Value: false
+        rarm_link4:
+          Value: false
+        rarm_link5:
+          Value: false
+        rarm_link6:
+          Value: false
+        rarm_link7:
+          Value: false
+        rarm_link8:
+          Value: false
+        real_base_link:
+          Value: false
+        rear_left_wheel_link:
+          Value: false
+        rear_right_wheel_link:
+          Value: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        odom:
+          base_link:
+            base_footprint:
+              {}
+            base_laser:
+              {}
+            real_base_link:
+              front_left_wheel_link:
+                {}
+              front_right_wheel_link:
+                {}
+              head_link0:
+                head_link1:
+                  camera_link:
+                    camera_color_frame:
+                      camera_color_optical_frame:
+                        {}
+                    camera_depth_frame:
+                      camera_depth_optical_frame:
+                        jedy/head_link1/camera:
+                          {}
+              larm_link0:
+                larm_link1:
+                  larm_link2:
+                    larm_link3:
+                      larm_link4:
+                        larm_link5:
+                          larm_link6:
+                            larm_link7:
+                              {}
+                            larm_link8:
+                              {}
+              rarm_link0:
+                rarm_link1:
+                  rarm_link2:
+                    rarm_link3:
+                      rarm_link4:
+                        rarm_link5:
+                          rarm_link6:
+                            rarm_link7:
+                              {}
+                            rarm_link8:
+                              {}
+              rear_left_wheel_link:
+                {}
+              rear_right_wheel_link:
+                {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -381,7 +513,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 2.141007661819458
+      Distance: 8.629669189453125
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -396,10 +528,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6397961974143982
+      Pitch: 1.129796028137207
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.843571901321411
+      Yaw: 3.178579330444336
     Saved: ~
 Window Geometry:
   Displays:
