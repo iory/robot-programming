@@ -270,10 +270,20 @@ def generate_launch_description():
         arguments=[
             '/imu_raw@sensor_msgs/msg/Imu@gz.msgs.IMU',
         ],
-        output='screen',
-        remappings=[
-            ('/imu_raw', '/imu'),
-        ]
+        output='screen'
+    )
+
+    # IMU frame changer - changes frame_id from Gazebo's auto-generated name to real_base_link
+    imu_frame_changer = Node(
+        package='jedy_bringup',
+        executable='imu_frame_changer.py',
+        parameters=[
+            {'use_sim_time': use_sim_time},
+            {'input_topic': '/imu_raw'},
+            {'output_topic': '/imu'},
+            {'target_frame': 'real_base_link'}
+        ],
+        output='screen'
     )
 
     # Note: mecanum_drive_controller publishes odom and TF directly, so no bridge needed
@@ -321,6 +331,7 @@ def generate_launch_description():
         lidar_bridge,
         scan_frame_changer,
         imu_bridge,
+        imu_frame_changer,
         delayed_joint_state_broadcaster,
         delayed_mecanum_drive_controller,
         delayed_head_controller,

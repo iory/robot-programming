@@ -2,105 +2,50 @@
 ### ekf config file ###
 
 ekf_filter_node:
-
   ros__parameters:
-
     frequency: 30.0
-
-
-
     # Defaults to "robot_localization_estimation_node" if unspecified
-
     sensor_timeout: 0.1
-
-
-
     two_d_mode: true
-
-
-
     # The order of the values is x, y, z, roll, pitch, yaw, vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az
-
     transform_time_offset: 0.0
-
     transform_timeout: 0.0
-
     print_diagnostics: true
-
     debug: false
-
-
-
     publish_tf: true
-
     publish_acceleration: false
 
-
-
     # Frames
-
     map_frame: map              # Defaults to "map" if unspecified
-
     odom_frame: odom            # Defaults to "odom" if unspecified
-
-    base_link_frame: base_link  # Defaults to "base_link" if unspecified
-
+    base_link_frame: real_base_link  # Match IMU frame_id temporarily
     world_frame: odom           # Defaults to the value of odom_frame if unspecified
-
-
-
     # Odometry from wheel encoders (mecanum_drive_controller)
-
     odom0: /mecanum_drive_controller/odometry
-
     odom0_config: [false, false, false,    # x, y, z (position - we use odometry for x,y in 2D)
-
                    false, false, false,    # roll, pitch, yaw (orientation - we use IMU for yaw)
-
                    true,  true,  false,    # vx, vy, vz (linear velocity)
-
-                   false, false, true,     # vroll, vpitch, vyaw (angular velocity)
-
+                   false, false, false,     # vroll, vpitch, vyaw (angular velocity)
                    false, false, false]    # ax, ay, az (linear acceleration)
 
     odom0_differential: false
-
     odom0_relative: false
-
     odom0_queue_size: 10
-
-
-
     # IMU sensor
-
     imu0: /imu
-
     imu0_config: [false, false, false,     # x, y, z (position)
-
-                  false, false, true,      # roll, pitch, yaw (orientation - use yaw from IMU)
-
+                  false, false, true,       # roll, pitch, yaw (orientation - use yaw from IMU)
                   false, false, false,     # vx, vy, vz (linear velocity)
-
                   false, false, true,      # vroll, vpitch, vyaw (angular velocity - use from IMU)
-
-                  true,  true,  false]     # ax, ay, az (linear acceleration - use from IMU)
-
+                  false, false, false]     # ax, ay, az (linear acceleration - use from IMU)
     imu0_differential: false
-
     imu0_relative: false
-
     imu0_queue_size: 10
-
-    imu0_remove_gravitational_acceleration: true
-
-
+    imu0_remove_gravitational_acceleration: false
 
     # Process noise covariance matrix
-
     # The values are ordered as x, y, z, roll, pitch, yaw, vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az
-
     process_noise_covariance: [0.05, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
-
                                0.0,  0.05,   0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
 
                                0.0,  0.0,    0.06,   0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
@@ -142,9 +87,7 @@ ekf_filter_node:
                                   0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
 
                                   0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
-
-                                  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
-
+                                  0.0,  0.0,  0.0,  0.0,  0.0,  1.0, 0.0,  0.0,  0.0,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
                                   0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
 
                                   0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
@@ -155,7 +98,7 @@ ekf_filter_node:
 
                                   0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   1e-9,  0.0,   0.0,   0.0,   0.0,
 
-                                  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0,   1e-9,  0.0,   0.0,   0.0,
+                                  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0,   1.0,  0.0,   0.0,   0.0,
 
                                   0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0,   0.0,   1e-9,  0.0,   0.0,
 
