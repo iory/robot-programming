@@ -11,7 +11,7 @@
     </asset>
     <library_images>
         <image id="texture0" name="texture0">
-            <init_from>checkerboard_20mm_7x4_color.png</init_from>
+            <init_from>file://checkerboard/checkerboard_20mm_7x4_color.png</init_from>
         </image>
     </library_images>
     <library_materials>
