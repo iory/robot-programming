@@ -380,6 +380,8 @@
           </surface>
         </collision>
         <visual name="visual">
+          <cast_shadows>1</cast_shadows>
+          <transparency>0</transparency>
           <geometry>
             <mesh>
               <uri>checkerboard/checkerboard_20mm_7x4.dae</uri>
