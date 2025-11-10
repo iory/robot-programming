@@ -1,0 +1,114 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 30  # Hz
+
+    # Hardware interface
+    hardware_components:
+      - name: kxr_robot_hardware
+        type: kxr_controller/KXRRobotHardware
+        param_file: ""
+
+    # Controllers
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    mecanum_drive_controller:
+      type: mecanum_drive_controller/MecanumDriveController
+
+    head_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    rarm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    larm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+# Mecanum drive controller configuration
+mecanum_drive_controller:
+  ros__parameters:
+    reference_timeout: 0.5
+
+    front_left_wheel_command_joint_name: "front_left_wheel_joint"
+    front_right_wheel_command_joint_name: "front_right_wheel_joint"
+    rear_left_wheel_command_joint_name: "rear_left_wheel_joint"
+    rear_right_wheel_command_joint_name: "rear_right_wheel_joint"
+
+    kinematics:
+      base_frame_offset: { x: 0.0, y: 0.0, theta: 0.0 }
+      wheels_radius: 0.030083
+      sum_of_robot_center_projection_on_X_Y_axis: 0.0666
+
+    base_frame_id: "base_link"
+    odom_frame_id: "odom"
+    enable_odom_tf: false
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+
+    tf_frame_prefix_enable: false
+
+# Head controller configuration
+head_controller:
+  ros__parameters:
+    joints:
+      - head_joint0
+      - head_joint1
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    allow_nonzero_velocity_at_trajectory_end: true
+    allow_integration_in_goal_trajectories: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 2.0
+
+# Right arm controller configuration
+rarm_controller:
+  ros__parameters:
+    joints:
+      - rarm_joint0
+      - rarm_joint1
+      - rarm_joint2
+      - rarm_joint3
+      - rarm_joint4
+      - rarm_joint5
+      - rarm_joint6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 2.0
+
+# Left arm controller configuration
+larm_controller:
+  ros__parameters:
+    joints:
+      - larm_joint0
+      - larm_joint1
+      - larm_joint2
+      - larm_joint3
+      - larm_joint4
+      - larm_joint5
+      - larm_joint6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 2.0

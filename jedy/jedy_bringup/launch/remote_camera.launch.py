@@ -14,18 +14,27 @@ def generate_launch_description():
     camera_namespace = LaunchConfiguration('camera', default='camera')
     remote_namespace = LaunchConfiguration('remote', default='remote')
 
+    #
+    # === 4つのノードすべてに QoS パラメータを追加 ===
+    #
+    
     # Decompress color image (compressed -> raw)
     color_republish = Node(
         package='image_transport',
         executable='republish',
         name='color_republish',
-        arguments=['compressed', 'raw'],
+        arguments=[],
         output='screen',
         parameters=[
             {'use_sim_time': use_sim_time},
+            {'in_transport': 'compressed'},
+            {'out_transport': 'raw'},
+            # ▼ Subscriber (入力) 側の QoS を Publisher (カメラ) に合わせる
+            {'reliability': 'reliable'},
+            {'durability': 'transient_local'},
         ],
         remappings=[
-            ('in', [camera_namespace, '/color/image_rect_raw']),
+            ('in/compressed', [camera_namespace, '/color/image_rect_raw/compressed']),
             ('out', [remote_namespace, '/color/image_rect_raw']),
         ]
     )
@@ -40,34 +49,12 @@ def generate_launch_description():
             [remote_namespace, '/color/camera_info']
         ],
         output='screen',
-        parameters=[{'use_sim_time': use_sim_time}]
-    )
-
-    # Decompress depth image (compressedDepth -> raw)
-    depth_republish = Node(
-        package='image_transport',
-        executable='republish',
-        name='depth_republish',
-        arguments=['compressedDepth', 'raw'],
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}],
-        remappings=[
-            ('in', [camera_namespace, '/depth/image_rect_raw']),
-            ('out', [remote_namespace, '/depth/image_rect_raw']),
+        parameters=[
+            {'use_sim_time': use_sim_time},
+            # ▼ Subscriber (入力) 側の QoS を Publisher (カメラ) に合わせる
+            {'reliability': 'reliable'},
+            {'durability': 'transient_local'},
         ]
-    )
-
-    # Relay depth camera_info
-    depth_info_relay = Node(
-        package='topic_tools',
-        executable='relay',
-        name='depth_info_relay',
-        arguments=[
-            [camera_namespace, '/depth/camera_info'],
-            [remote_namespace, '/depth/camera_info']
-        ],
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}]
     )
 
     # Decompress aligned depth image (compressedDepth -> raw)
@@ -75,11 +62,18 @@ def generate_launch_description():
         package='image_transport',
         executable='republish',
         name='aligned_depth_republish',
-        arguments=['compressedDepth', 'raw'],
+        arguments=[],
         output='screen',
-        parameters=[{'use_sim_time': use_sim_time}],
+        parameters=[
+            {'use_sim_time': use_sim_time},
+            {'in_transport': 'compressedDepth'},
+            {'out_transport': 'raw'},
+            # ▼ Subscriber (入力) 側の QoS を Publisher (カメラ) に合わせる
+            {'reliability': 'reliable'},
+            {'durability': 'transient_local'},
+        ],
         remappings=[
-            ('in', [camera_namespace, '/aligned_depth_to_color/image_raw']),
+            ('in/compressedDepth', [camera_namespace, '/aligned_depth_to_color/image_raw/compressedDepth']),
             ('out', [remote_namespace, '/aligned_depth_to_color/image_raw']),
         ]
     )
@@ -94,7 +88,12 @@ def generate_launch_description():
             [remote_namespace, '/aligned_depth_to_color/camera_info']
         ],
         output='screen',
-        parameters=[{'use_sim_time': use_sim_time}]
+        parameters=[
+            {'use_sim_time': use_sim_time},
+            # ▼ Subscriber (入力) 側の QoS を Publisher (カメラ) に合わせる
+            {'reliability': 'reliable'},
+            {'durability': 'transient_local'},
+        ]
     )
 
     # Point cloud generation from RGB + Aligned Depth
@@ -130,8 +129,6 @@ def generate_launch_description():
         ),
         color_republish,
         color_info_relay,
-        depth_republish,
-        depth_info_relay,
         aligned_depth_republish,
         aligned_info_relay,
         point_cloud_xyzrgb,
