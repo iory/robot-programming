@@ -34,9 +34,22 @@ jobs:
         run: |
           pip install -r docs/requirements.txt
 
+      - name: Debug - Check docs structure
+        run: |
+          echo "=== Checking docs directory ==="
+          ls -la docs/
+          echo "=== Content of _config.yml ==="
+          cat docs/_config.yml
+          echo "=== Content of _toc.yml ==="
+          cat docs/_toc.yml
+          echo "=== Content of index.md ==="
+          cat docs/index.md
+          echo "=== Jupyter Book version ==="
+          jupyter-book --version
+
       - name: Build Jupyter Book
         run: |
-          jupyter-book build docs
+          jupyter-book build docs --verbose
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
